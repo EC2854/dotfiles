@@ -52,7 +52,7 @@ For battery and brightness indicators uncomment lines in:
 
 ## Installation
 ``` sh
-git clone https://github.com/EC2854/Hyprland-Dots.git Dots && cd Dots && ./install.sh
+git clone https://github.com/EC2854/dotfiles && cd dotfiles && ./install.sh
 ```
 
 
@@ -61,11 +61,11 @@ git clone https://github.com/EC2854/Hyprland-Dots.git Dots && cd Dots && ./insta
 - [SolDoesTech](https://github.com/SolDoesTech) for starting this all
 
 
-<a href="https://star-history.com/#EC2854/Hyprland-Dots&Date">
+<a href="https://star-history.com/#EC2854/dotfiles&Date">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=EC2854/Hyprland-Dots&type=Date&theme=dark" />
-        <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=EC2854/Hyprland-Dots&type=Date" />
-        <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=EC2854/Hyprland-Dots&type=Date" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=EC2854/dotfiles&type=Date&theme=dark" />
+        <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=EC2854/dotfiles&type=Date" />
+        <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=EC2854/dotfiles&type=Date" />
     </picture>
 </a>
 
