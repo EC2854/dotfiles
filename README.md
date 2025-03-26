@@ -12,11 +12,13 @@
 ## 🌈 Yet Another Hyprland Material Dotfiles
 ![material](./screenshots/material.png) 
 > [< switch to branch >](https://github.com/EC2854/dotfiles/tree/material) 
+
 This is my main setup. I use it on Arch Linux but it should work on most systems.
 
 ## 🥛 O! (milk outside a bag of milk outside a bag of milk inspired rice)
 ![milk](./screenshots/milk.png) 
 > [< switch to branch >](https://github.com/EC2854/dotfiles/tree/milk) 
+
 This is setup for my laptop running Alpine Linux.
 > [!WARNING]
 > This configuration is experimental and i don't recommended it unless you know what are you doing. 
