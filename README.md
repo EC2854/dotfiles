@@ -36,7 +36,7 @@
 ## Installation
 script for this branch is untested so it will probably fail. :P
 ``` sh
-git clone https://github.com/EC2854/dotfiles && cd dotfiles && ./install.sh
+git clone https://github.com/EC2854/dotfiles && cd dotfiles && git checkout milk && ./install.sh
 ```
 
 
