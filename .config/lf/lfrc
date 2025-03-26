@@ -2,7 +2,6 @@ set shell sh
 set hidden false
 set ignorecase true
 set icons true
-# set icons false
 set drawbox true
 set preview true
 set sixel true
@@ -30,10 +29,10 @@ cmd on-cd &{{
 }}
 
 # starship integration 
-cmd on-cd &{{
-    fmt="$(STARSHIP_SHELL= starship prompt | sed 's/\\/\\\\/g;s/"/\\"/g')"
-    lf -remote "send $id set promptfmt \"$fmt\""
-}}
+# cmd on-cd &{{
+#     fmt="$(STARSHIP_SHELL= starship prompt | sed 's/\\/\\\\/g;s/"/\\"/g')"
+#     lf -remote "send $id set promptfmt \"$fmt\""
+# }}
 
 # Eza for a bottom line 
 cmd on-select &{{
@@ -77,7 +76,7 @@ cmd nnn-preview %{{
 # Custom stuff
 cmd mk %{{
     read ans
-    if [[ "$ans" == */ ]]; then
+    if [ "$ans" = */ ]; then
         mkdir -p "$ans"
 
     else
@@ -104,6 +103,10 @@ cmd unarchive ${{
 cmd open &{{
     case $(file --mime-type -Lb $f) in
         text/*) lf -remote "send $id \$$EDITOR \$fx";;
+        image/*) imv "$fx"> /dev/null 2> /dev/null &;;
+        video/*) mpv "$fx"> /dev/null 2> /dev/null &;;
+        application/pdf) zathura "$fx"> /dev/null 2> /dev/null &;;
+        audio/*) lf -remote "send $id \$mpv --no-video \$fx";;
         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
@@ -140,8 +143,8 @@ cmd bulk-rename ${{
 cmd clipboard-copy &{{
     type=$(file -Lb --mime-type "$f")
 
-    [[ "$type" = "image/"* ]] && {
-        [[ "$type" != "image/png" ]] && {
+    [ "$type" = "image/"* ] && {
+        [ "$type" = "image/png" ] || {
             tmp_image=$(mktemp /tmp/lf-copy.XXXXXX.png)
             ffmpeg -y -v 0 -i "$f" "$tmp_image"
             f="$tmp_image"
@@ -158,7 +161,7 @@ cmd clipboard-paste &{{
 cmd share $curl -F"file=@$fx" -Fexpires=4 https://0x0.st | wl-copy
 
 cmd set-wall &{{
-    matugen image "$f"
+    swaymsg output "*" bg "$f" fill
 }}
 cmd mount-drive ${{
     ~/.local/share/scripts/mount_removable.sh

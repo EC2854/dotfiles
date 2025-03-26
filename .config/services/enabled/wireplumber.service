@@ -1,0 +1,8 @@
+[Unit]
+Description=Wireplumber pipewire session manager
+Documentation=https://pipewire.pages.freedesktop.org/wireplumber/
+After=pipewire
+
+[Service]
+ExecStart=wireplumber
+Restart=on-failure

@@ -1,0 +1,9 @@
+[Unit]
+Description=udiskie daemon
+Documentation=man:udiskie(8)
+
+[Service]
+Type=simple
+ExecStart=udiskie
+Restart=always
+RestartSec=1

@@ -1,3 +1,6 @@
+# Make sure that kew is closed before editing this file in order for changes to take effect.
+
+path=/home/lain/Music
 coverEnabled=1
 coverAnsi=0
 visualizerEnabled=1
@@ -6,15 +9,25 @@ useConfigColors=1
 allowNotifications=1
 hideLogo=1
 hideHelp=1
+lastVolume=100
 
+# Cache: Set to 1 to use cache of the music library directory tree for faster startup times.
 cacheLibrary=1
 
-color=4
-artistColor=4
-titleColor=4
-enqueuedColor=4
+# Color values are 0=Black, 1=Red, 2=Green, 3=Yellow, 4=Blue, 5=Magenta, 6=Cyan, 7=White
+# These mostly affect the library view.
+
+# Logo color:
+color=1
+# Header color in library view:
+artistColor=1
+# Now playing song text in library view:
+titleColor=1
+# Color of enqueued songs in library view:
+enqueuedColor=1
 
 # Key Bindings:
+
 volumeUp=+
 volumeUpAlt==
 volumeDown=-
@@ -43,3 +56,7 @@ showSearchAlt=/
 showKeysAlt=B
 
 quit=q
+
+# For special keys use terminal codes: OS, for F4 for instance. This can depend on the terminal.
+# You can find out the codes for the keys by using tools like showkey.
+# For special keys, see the key value after the bracket "[" after typing "showkey -a" in the terminal and then pressing a key you want info about.

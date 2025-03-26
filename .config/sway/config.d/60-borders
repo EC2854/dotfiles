@@ -1,0 +1,12 @@
+default_border pixel 3px
+default_floating_border pixel 3px
+
+gaps {
+    inner 5px
+    outer 5px
+}
+
+client.focused          $accent $accent $surface $accent $accent
+client.focused_inactive $surface $surface $accent $surface $surface
+client.unfocused        $surface $surface $accent $surface $surface
+client.urgent           $error $error $accent $error $error

@@ -1,8 +1,8 @@
 [options]
-background = 131318
+background = 0d0d14
 
-overlay_text_color = e5e1e9 
-overlay_background_color = 131318 
+overlay_text_color = c3c3c3 
+overlay_background_color = 1b1424
 overlay_background_alpha = ff
 overlay_position_bottom = true
 

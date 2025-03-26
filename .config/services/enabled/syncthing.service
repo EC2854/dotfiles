@@ -1,0 +1,6 @@
+[Unit]
+Description=Syncthing
+
+[Service]
+ExecStart=syncthing
+Restart=on-failure

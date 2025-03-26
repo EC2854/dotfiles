@@ -1,0 +1,9 @@
+[Unit]
+Description=Lightweight Wayland notification daemon
+Documentation=man:mako(1)
+
+[Service]
+BusName=org.freedesktop.Notifications
+ExecStart=mako
+ExecReload=makoctl reload
+Restart=on-failure

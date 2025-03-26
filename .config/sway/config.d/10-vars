@@ -1,0 +1,22 @@
+set {
+    $accent #ac3231
+    $error #fb4934
+    $surface #1b1424
+    $wallpaper $(find ~/Pictures/Wallpapers/ -type f | shuf -n 1)
+
+    $mod Mod4
+
+    $left h
+    $down j
+    $up k
+    $right l
+    
+    $term "footclient"
+    $tmux "footclient zsh -c ' command -v tmux > /dev/null && TERM=xterm-256color && { tmux a || tmux } || zsh' "
+    $filemanager "source ~/.config/zsh/env.zsh && footclient -T lf-float ~/.local/share/scripts/lfwrapper.sh"
+    $launcher "killall tofi || tofi-drun --drun-launch=true"
+    $browser "flatpak run app.zen_browser.zen"
+
+    $discord "flatpak run dev.vencord.Vesktop"
+    $keepass "flatpak run org.gnome.World.Secrets"
+}

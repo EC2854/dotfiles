@@ -34,17 +34,8 @@ FZF_ALT_C_COMMAND=
 FZF_CTRL_T_COMMAND= 
 source <(fzf --zsh)
 
-case ${TERM} in 
-    linux*|tmux*)
-        PROMPT="%B%F{magenta}[%f%b%B%F{blue}%n%f%b%B@%b%B%F{blue}%m%f%b%B%F{magenta}] [%f%b%B%F{blue}%~%f%b%B%F{magenta}]%f%b%B%F{magenta}
+PROMPT="%B%F{red}[%f%b%B%F{magenta}%n%f%b%B@%b%B%F{magenta}%m%f%b%B%F{red}] [%f%b%B%F{magenta}%~%f%b%B%F{red}]%f%b%B%F{red}
 > %f%b"
-    ;;
-    *)
-        eval "$(starship init zsh)"
-    ;;
-
-esac
-# Starship prompt
 
 # Fastfetch with random image
 # fastfetch --logo-height 6 --sixel "$(find ~/Pictures/menhera-chan -type f | shuf -n 1)"

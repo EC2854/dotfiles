@@ -1,0 +1,10 @@
+[Unit]
+Description=xdg-desktop-portal backend for gtk 
+Documentation=man:xdg-desktop-portal-gtk(5)
+After=pipewire
+Before=xdg-desktop-portal
+
+[Service]
+Type=simple
+ExecStart=/usr/libexec/xdg-desktop-portal-gtk
+Restart=always

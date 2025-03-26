@@ -1,0 +1,8 @@
+[Unit]
+Description=Pipewire pulseaudio compat.
+Documentation=man:pipewire-pulse(1)
+After=pipewire
+
+[Service]
+ExecStart=pipewire-pulse
+Restart=on-failure

@@ -1,0 +1,8 @@
+[Unit]
+Description=Autotiling
+
+[Service]
+ExecStart=autotiling
+
+[Install]
+WantedBy=graphical-session.target

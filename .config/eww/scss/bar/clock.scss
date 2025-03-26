@@ -1,5 +1,6 @@
 .clock {
-    margin-right: 0;
+    padding: 0 .6em;
+    background-color: $surface_high;
     &_sep {
         color: $primary;
         font-weight: bolder;

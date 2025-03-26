@@ -17,23 +17,23 @@
                 )
             )
         )
-        ;; (box :class "tray_spacer")
-        ;; (eventbox :onscroll "scripts/change_brightness.sh {}" :onhover "eww update brightness_rev=true" :onhoverlost '${brightness_stay ? "" : "eww update brightness_rev=false"}' :onrightclick "scripts/toggle_value.sh brightness_stay"
-        ;;     (box :space-evenly "false" :orientation "h"
-        ;;         (label :class 'tray_button' :text "${BRIGHTNESS.icon}")
-        ;;         (revealer :transition "slideright" :reveal brightness_rev :duration "350ms"
-        ;;             (button :class 'tray_value' "${BRIGHTNESS.value}%")
-        ;;         )
-        ;;     )
-        ;; )
-        ;; (box :class "tray_spacer")
-        ;; (eventbox :onhover "eww update battery_rev=true" :onhoverlost '${battery_stay ? "" : "eww update battery_rev=false"}' :onrightclick "scripts/toggle_value.sh battery_stay"
-        ;;     (box :space-evenly "false" :orientation "h"
-        ;;         (label :class 'tray_button ${battery_low ? "muted" : ""}' :text "${BATTERY.icon}")
-        ;;         (revealer :transition "slideright" :reveal battery_rev :duration "350ms"
-        ;;             (label :class 'tray_value' :text "${BATTERY.value}%")
-        ;;         )
-        ;;     )
-        ;; )
+        (box :class "tray_spacer")
+        (eventbox :onscroll "scripts/change_brightness.sh {}" :onhover "eww update brightness_rev=true" :onhoverlost '${brightness_stay ? "" : "eww update brightness_rev=false"}' :onrightclick "scripts/toggle_value.sh brightness_stay"
+            (box :space-evenly "false" :orientation "h"
+                (label :class 'tray_button' :text "${BRIGHTNESS.icon}")
+                (revealer :transition "slideright" :reveal brightness_rev :duration "350ms"
+                    (button :class 'tray_value' "${BRIGHTNESS.value}%")
+                )
+            )
+        )
+        (box :class "tray_spacer")
+        (eventbox :onhover "eww update battery_rev=true" :onhoverlost '${battery_stay ? "" : "eww update battery_rev=false"}' :onrightclick "scripts/toggle_value.sh battery_stay"
+            (box :space-evenly "false" :orientation "h"
+                (label :class 'tray_button ${battery_low ? "muted" : ""}' :text "${BATTERY.icon}")
+                (revealer :transition "slideright" :reveal battery_rev :duration "350ms"
+                    (button :class 'tray_value' "${BATTERY.value}%")
+                )
+            )
+        )
     )
 )

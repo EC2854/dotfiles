@@ -1,5 +1,5 @@
 <div align="center">
-<h1> Yet Another Material Hyprland Dotfiles </h1>
+<h1>milk outside a bag of milk outside a bag of milk rice</h1>
 </div>
 
 <div align="center">
@@ -14,52 +14,33 @@
 ![screenshot](./screenshots/2.png) 
 ![screenshot](./screenshots/3.png) 
 ![screenshot](./screenshots/4.png) 
-![screenshot](./screenshots/5.png) 
-![screenshot](./screenshots/6.png) 
 
 <details>
 <summary><h2>Stuff i use</h2></summary>
 
-- Window Manager - [Hyprland](https://github.com/hyprwm/Hyprland)
-- Material Color Generation - [Matugen](https://github.com/InioX/matugen)
-- Panel - [eww](https://github.com/elkowar/eww)
-- Launcher - [tofi](https://github.com/philj56/tofi)
-- Shell - [zsh](https://zsh.org)
-- Prompt - [starship](https://github.com/starship/starship)
-- Terminal - [foot](https://codeberg.org/dnkl/foot)
-- File Manager - [lf](https://github.com/gokcehan/lf)
-- IDE - [neovim](https://github.com/neovim/neovim)
-- Browser - [Zen](https://zen-browser.app)
-- Music Player - [kew](https://github.com/ravachol/kew)
-- Wallpaper daemon - [swww](https://github.com/LGFae/swww)
-- Wallpapers - [Here :3](https://github.com/EC2854/wallpapers)
-- font - [Meslo LGL Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.tar.xz)
+- Window Manager - [Sway](https://swaywm.org/)
+- user service supervisor - [superd](https://sr.ht/~craftyguy/superd/)
+- panel - [eww](https://github.com/elkowar/eww)
+- launcher - [tofi](https://github.com/philj56/tofi)
+- shell - [zsh](https://zsh.org)
+- terminal - [foot](https://codeberg.org/dnkl/foot)
+- file manager - [lf](https://github.com/gokcehan/lf)
+- browser - [Zen](https://zen-browser.app)
+- music player - [kew](https://github.com/ravachol/kew)
+- wallpapers - [Here :3](https://github.com/EC2854/wallpapers/tree/main/milk)
+- font - [BigBlueTerm Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/bigblueterminal.tar.xz)
+- Terminal font - [Meslo LGL Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.tar.xz)
 
 </details>
 
-
-## Laptops 
-For battery and brightness indicators uncomment lines in:
-- `.config/eww/variables.yuck`
-- `.config/eww/tray.yuck`
-
-*(Eww comments start with `;;` :3)*
-
-
-## Important Notes
-- This setup uses [uwsm](https://github.com/Vladimir-csp/uwsm) to manage the Hyprland session. So make sure to start the session with **uwsm**.  Refer to the [Hyprland Wiki](https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#launching-hyprland-with-uwsm) for more details.   
-- I install GUI apps via **Flatpak**, so some configs/scripts expect Flatpak instead of native packages.
-
 ## Installation
+script for this branch is untested so it will probably fail. :P
 ``` sh
 git clone https://github.com/EC2854/dotfiles && cd dotfiles && ./install.sh
 ```
 
 
 ## Thank You
-- [flick0](https://github.com/flickowoa) for inspiration
-- [SolDoesTech](https://github.com/SolDoesTech) for starting this all
-
 
 <a href="https://star-history.com/#EC2854/dotfiles&Date">
     <picture>

@@ -1,0 +1,8 @@
+[Unit]
+Description=Server for handling audio, video streams
+Documentation=man:pipewire(1)
+Documentation=https://pipewire.org/
+
+[Service]
+ExecStart=pipewire
+Restart=on-failure

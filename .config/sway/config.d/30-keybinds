@@ -1,0 +1,81 @@
+floating_modifier $mod normal
+bindsym {
+    $mod+q kill
+    $mod+Control+q exec swaylock
+    $mod+Shift+Escape exit
+    $mod+Space exec $launcher
+
+    $mod+t exec $tmux
+    $mod+Shift+t exec $term
+    $mod+a exec $term -T mixer-float pulsemixer
+    $mod+e exec $filemanager
+    $mod+d exec $term -T kew kew
+    $mod+Shift+d exec $discord
+    $mod+Shift+b exec $keepass
+    $mod+w exec $browser
+
+    $mod+f fullscreen
+    $mod+Control+space floating toggle
+
+    $mod+$left focus left
+    $mod+$down focus down
+    $mod+$up focus up
+    $mod+$right focus right
+
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
+
+    $mod+Shift+$left move left
+    $mod+Shift+$down move down
+    $mod+Shift+$up move up
+    $mod+Shift+$right move right
+
+    $mod+Shift+Left move left
+    $mod+Shift+Down move down
+    $mod+Shift+Up move up
+    $mod+Shift+Right move right
+
+    $mod+1 workspace number 1
+    $mod+2 workspace number 2
+    $mod+3 workspace number 3
+    $mod+4 workspace number 4
+    $mod+5 workspace number 5
+    $mod+6 workspace number 6
+    $mod+7 workspace number 7
+    $mod+8 workspace number 8
+    $mod+9 workspace number 9
+    $mod+0 workspace number 10
+
+    $mod+Shift+1 move container to workspace number 1
+    $mod+Shift+2 move container to workspace number 2
+    $mod+Shift+3 move container to workspace number 3
+    $mod+Shift+4 move container to workspace number 4
+    $mod+Shift+5 move container to workspace number 5
+    $mod+Shift+6 move container to workspace number 6
+    $mod+Shift+7 move container to workspace number 7
+    $mod+Shift+8 move container to workspace number 8
+    $mod+Shift+9 move container to workspace number 9
+    $mod+Shift+0 move container to workspace number 10
+
+    XF86Display exec ~/.local/share/scripts/change_monitor.sh
+
+
+    $mod+Shift+s exec grim - | wl-copy --type image/png
+    Print exec grim - | wl-copy --type image/png
+
+    $mod+s exec ~/.local/share/scripts/screenshot.sh 
+    Shift+Print exec ~/.local/share/scripts/screenshot.sh
+
+    --locked XF86AudioMute exec ~/.local/share/scripts/volume.sh vol mute
+    --locked $mod+Shift+p exec ~/.local/share/scripts/volume.sh vol mute
+
+    --locked XF86AudioLowerVolume exec ~/.local/share/scripts/volume.sh vol down
+    --locked XF86AudioRaiseVolume exec ~/.local/share/scripts/volume.sh vol up
+    --locked XF86AudioMicMute exec ~/.local/share/scripts/volume.sh mic mute
+    --locked $mod+Alt+p exec ~/.local/share/scripts/volume.sh mic mute
+
+    --locked XF86MonBrightnessDown exec ~/.local/share/scripts/volume.sh brt down
+    --locked XF86MonBrightnessUp exec ~/.local/share/scripts/volume.sh brt up
+}

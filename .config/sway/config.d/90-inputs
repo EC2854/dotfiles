@@ -1,0 +1,10 @@
+input {
+    type:keyboard {
+        xkb_options ctrl:nocaps
+    }
+    type:touchpad {
+        tap enabled
+        natural_scroll enabled
+    }
+}
+

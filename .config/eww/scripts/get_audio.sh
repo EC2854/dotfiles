@@ -56,7 +56,7 @@ handle() {
 }
 
 handle
-pactl subscribe | grep --line-buffered "sink\|source" | while read -r _; do
+pactl subscribe | while read -r _; do
     handle
 done
 

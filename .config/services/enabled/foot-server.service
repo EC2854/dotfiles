@@ -1,0 +1,8 @@
+[Unit]
+Description=Fast, lightweight and minimalistic Wayland terminal emulator
+Documentation=man:foot(1)
+
+[Service]
+ExecStart=/home/lain/.local/share/scripts/foot_server.sh
+Restart=always
+antedBy=graphical-session.target

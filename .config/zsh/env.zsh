@@ -1,6 +1,7 @@
 # variables for zsh and bash
 # this file in sourced in .zshrc and .bashrc
 export PATH="$PATH:/home/$USER/.local/share/scripts"
+export LC_ALL="C.UTF-8"
 
 #fzf settings 
 source ~/.config/zsh/fzf-style.zsh

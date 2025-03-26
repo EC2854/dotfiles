@@ -1,0 +1,9 @@
+[Unit]
+Description=Desktop integration portals for sandboxed apps
+Documentation=https://flatpak.github.io/xdg-desktop-portal/
+After=pipewire
+
+[Service]
+Type=simple
+ExecStart=/usr/libexec/xdg-desktop-portal
+Restart=always

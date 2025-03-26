@@ -1,0 +1,10 @@
+for_window {
+    [app_id="org.gnome.Calculator"] floating enable
+
+    [title=".*-float"] floating enable, resize set width 1280 height 720; focus; move position center
+}
+assign {
+    [app_id="zen"] workspace 2
+    [app_id="vesktop"] workspace 3
+    [title="kew"] workspace 3
+}

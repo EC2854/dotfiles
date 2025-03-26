@@ -1,13 +1,12 @@
 .workspaces {
     &_button {
-        border-radius: 1em;
         background-color: $surface_high;
         margin: 0 .2em;
-        padding: 0 .8em;
+        padding: .3em .9em;
         transition: .3s;
         &.current {
             background-color: $primary;
-            padding: 0 1.2em;
+            padding: 0 1.4em;
         }
         &:hover {
             background-color: $secondary;

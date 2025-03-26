@@ -1,0 +1,4 @@
+exec_always {
+    superd
+    eww open bar --no-daemonize
+}

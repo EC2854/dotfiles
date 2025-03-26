@@ -1,17 +1,9 @@
 #!/usr/bin/env bash
 
-FONT="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.tar.xz"
-
-not_arch_btw=false
-
-packages_needed=(
-    "git" "curl" # Bloated script XD
-)
+FONT="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/bigblueterminal.tar.xz"
+FONT2="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.tar.xz"
 packages_to_install=(
-    "hyprland" "mpvpaper" "swww" "mako" "polkit-kde-agent" "eww" "tofi" "hyprwayland-scanner" "hypridle" "hyprlock" "jq" "uwsm" "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk" # important stuff
-    "zsh" "eza" "fzf" "lf" "foot" "neovim" "fastfetch" "starship" "tmux" "kew" "zoxide" # terminal stuff
-    "noto-fonts-cjk" "ttf-noto-emoji-monochrome" # non nerd fonts
-    "acpi" "inotify-tools" # optional - for laptop eww
+    "sway" "swayidle" "swaylock-effects" "swaybg" "eww" "tofi" "foot" "superd" "flatpak" "zsh" "vim" "imv" "mpv" 
 ) 
 
 # Print Functions
@@ -36,29 +28,6 @@ print_success() {
 ## general 
 print_info() {
     print_message 36 "INFO" "$1"  # Cyan color for general messages (36)
-}
-check_needed() {
-    local installed
-    installed=$(pacman -Qq)
-    for package in "${packages_needed[@]}"; do
-        grep -q "$package" <<< "$installed" || {
-            print_info "Installing dependencies for install script..."
-            sudo pacman -S --noconfirm --needed "${packages_needed[@]}" 
-            return
-        }
-    done
-
-}
-check_aur() {
-    if command -v paru &>/dev/null; then
-        aur_helper=paru
-        print_info "Using paru as the AUR helper."
-    elif command -v yay &>/dev/null; then
-        aur_helper=yay
-        print_info "Using yay as the AUR helper."
-    else
-        print_warning "No AUR helper found. The script will continue, but it won't install packages."
-    fi
 }
 clone_repository() {
     local repository_url="$1"
@@ -95,17 +64,20 @@ install_modernz() {
 
     print_success "Successfully installed mpv theme"
 }
-install_font() {
+install_fonts() {
     local fonts_dir="$HOME/.local/share/fonts"
     local font_dir
     font_dir=$(mktemp -d)
 
     print_info "Downloading nerd font"
-    curl -s -o "$font_dir"/Meslo.tar.xz -L "$FONT" 
+    curl -s -o "$font_dir"/BigBlueTerm.tar.xz -L "$FONT" 
+    curl -s -o "$font_dir"/Meslo.tar.xz -L "$FONT2" 
+    tar xJf "$font_dir/BigBlueTerm.tar.xz" -C "$font_dir"
     tar xJf "$font_dir/Meslo.tar.xz" -C "$font_dir"
 
     mkdir -p "$fonts_dir"
     mv "$font_dir"/MesloLGLNerdFont* "$fonts_dir/"
+    mv "$font_dir"/BigBlueTerm* "$fonts_dir/"
     rm -rf "$font_dir"
 
     print_success "Successfully downloaded nerd font"
@@ -122,11 +94,6 @@ ask_for_confirmation() {
     esac
 }
 # Check Distro
-command -v pacman &>/dev/null || { 
-    print_warning "This script is intended for Arch Linux. You can still run this script, but it won't install any packages." 
-    not_arch_btw=true
-}
-
 
 # Check for internet connection
 ping -q -c 1 github.com &>/dev/null || {
@@ -139,12 +106,6 @@ cd "$(dirname "$(realpath "$0")")" || {
     exit 1 
 }
 
-if [[ $not_arch_btw = false ]]; then
-    check_needed
-    check_aur
-fi
-
-print_warning "Check monitor config in ./config/hypr/hyprland.conf before running the script. RTFM: https://wiki.hyprland.org/Configuring/Monitors/"
 ask_for_confirmation
 
 [ -z "$aur_helper" ] && {
@@ -157,7 +118,6 @@ for file in .config/*; do
    copy "$file" ~/"$file"
 done
 
-copy .local/share/matugen ~/.local/share/matugen &
 copy .local/share/scripts ~/.local/share/scripts &
 copy .zshrc ~/.zshrc &
 

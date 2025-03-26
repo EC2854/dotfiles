@@ -1,12 +1,11 @@
 .bar-widget {
     margin: 8px 8px 0px 8px;
+    background-color: $surface;
+    border: 2px solid $surface_high;
 }
 .bean {
-    border-radius: 16px;
-    border: 2px solid $surface_high;
     margin: 0 .3em; 
-    padding: .3em 1.25em;
-    background-color: $surface;
+    padding: .3em 0;
     color: $text;
 }
 

@@ -6,6 +6,6 @@ case "$chosen" in
     "  Power Off") systemctl poweroff;;
     "  Restart") systemctl reboot;;
     "  Suspend") systemctl suspend;;
-    "  Lock") ~/.local/share/scripts/hyprlock.sh;;
+    "  Lock") hyprlock;;
     *) exit 1 ;;
 esac

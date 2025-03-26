@@ -1,0 +1,8 @@
+[Unit]
+Description=swayidle service
+Documentation=man:swayidle(1)
+
+[Service]
+Type=simple
+ExecStart=swayidle
+Restart=always

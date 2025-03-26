@@ -11,15 +11,16 @@ lfcd() {
 }
 
 alias t='tmux a || tmux'
+[[ $TERM = foot ]] && alias vim='TERM=xterm-256color vim'
 
 # misc
 alias v='nvim'
-alias s='sudo'
+alias s='doas'
 alias rg='rg -p' 
 alias cls='clear'
 alias cp='cp -v'
 alias mv='mv -v'
-alias rm='rm -rfv' # I know im a psychopath
+alias rm='trash -rv'
 
 # adding some colors :3
 alias ls='ls --color=always'
@@ -81,11 +82,11 @@ alias toggle-git='starship toggle git_branch'
 alias toggle-duration='starship toggle cmd_duration'
 alias chprompt='~/.config/zsh/scripts/changeprompt.sh'
 
-
-alias commit='git add . && git commit -m $1'
+alias add='git add . %% git status'
+alias commit='git commit -m $1'
 alias push='git push -u origin main'
 
 # Silly
-alias fucking='sudo'
-alias okpa='systemctl poweroff'
-
+alias fucking='doas'
+alias fuck='doas !!'
+alias okpa='s poweroff'
