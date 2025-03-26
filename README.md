@@ -52,7 +52,7 @@ For battery and brightness indicators uncomment lines in:
 
 ## Installation
 ``` sh
-git clone https://github.com/EC2854/dotfiles && cd dotfiles && ./install.sh
+git clone https://github.com/EC2854/dotfiles && cd dotfiles && git checkout material && ./install.sh
 ```
 
 
