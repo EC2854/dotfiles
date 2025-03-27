@@ -67,6 +67,7 @@ bindsym {
 
     $mod+s exec ~/.local/share/scripts/screenshot.sh 
     Shift+Print exec ~/.local/share/scripts/screenshot.sh
+    $mod+v exec ~/.local/share/scripts/color_picker.sh
 
     --locked XF86AudioMute exec ~/.local/share/scripts/volume.sh vol mute
     --locked $mod+Shift+p exec ~/.local/share/scripts/volume.sh vol mute
