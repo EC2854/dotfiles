@@ -1,4 +1,4 @@
-set shell sh
+set shell zsh
 set hidden false
 set ignorecase true
 set icons true
@@ -6,7 +6,7 @@ set drawbox true
 set preview true
 set sixel true
 
-set previewer ~/.config/lf/lf_preview
+set previewer ~/.config/lf/previewer
 
 set shellopts '-eu'
 
@@ -76,9 +76,13 @@ cmd nnn-preview %{{
 # Custom stuff
 cmd mk %{{
     read ans
-    if [ "$ans" = */ ]; then
-        mkdir -p "$ans"
-
+    if grep "/" <<< "$ans"; then
+        if grep "/$" <<< "$ans"; then
+            mkdir -p "$ans"
+        else
+            mkdir -p "$(dirname "$ans")"
+            touch "$ans"           
+        fi
     else
         touch "$ans"
     fi
@@ -160,6 +164,17 @@ cmd clipboard-paste &{{
 
 cmd share $curl -F"file=@$fx" -Fexpires=4 https://0x0.st | wl-copy
 
+cmd change-preview &{{
+    previewer=$(readlink -f ~/.config/lf/previewer)
+
+    if grep -q "info" <<< "$previewer"; then
+        ln -sf ~/.config/lf/previewers/preview ~/.config/lf/previewer
+    else
+        ln -sf ~/.config/lf/previewers/info ~/.config/lf/previewer
+    fi
+    lf -remote "send reload"
+}}
+
 cmd set-wall &{{
     swaymsg output "*" bg "$f" fill
 }}
@@ -173,6 +188,7 @@ cmd mount-archive ${{
     lf -remote "send $id cd \"$(printf '%s' "$mntdir" | sed 's/\\/\\\\/g;s/"/\\"/g')\""
 }}
 
+map i change-preview
 
 map R bulk-rename
 map s shell
