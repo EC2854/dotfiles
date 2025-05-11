@@ -1,28 +1,22 @@
-
 if empty($MYVIMRC) | let $MYVIMRC = expand('<sfile>:p') | endif
-
 if empty($XDG_CACHE_HOME)  | let $XDG_CACHE_HOME  = $HOME."/.cache"       | endif
 if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME = $HOME."/.config"      | endif
 if empty($XDG_DATA_HOME)   | let $XDG_DATA_HOME   = $HOME."/.local/share" | endif
 if empty($XDG_STATE_HOME)  | let $XDG_STATE_HOME  = $HOME."/.local/state" | endif
 
-if !has('nvim')
-  set runtimepath^=$XDG_CONFIG_HOME/vim
-  set runtimepath+=$XDG_DATA_HOME/vim
-  set runtimepath+=$XDG_CONFIG_HOME/vim/after
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_DATA_HOME/vim
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
 
-  set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
-  set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
+set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
+set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
 
-  set backupdir=$XDG_STATE_HOME/vim/backup | call mkdir(&backupdir, 'p', 0700)
-  set directory=$XDG_STATE_HOME/vim/swap   | call mkdir(&directory, 'p', 0700)
-  set viewdir=$XDG_STATE_HOME/vim/view     | call mkdir(&viewdir,   'p', 0700)
-  set undodir=$XDG_STATE_HOME/vim/undo     | call mkdir(&undodir,   'p', 0700)
-  set viminfofile=$XDG_STATE_HOME/vim/viminfo
-endif
+set backupdir=$XDG_STATE_HOME/vim/backup | call mkdir(&backupdir, 'p', 0700)
+set directory=$XDG_STATE_HOME/vim/swap   | call mkdir(&directory, 'p', 0700)
+set viewdir=$XDG_STATE_HOME/vim/view     | call mkdir(&viewdir,   'p', 0700)
+set undodir=$XDG_STATE_HOME/vim/undo     | call mkdir(&undodir,   'p', 0700)
+set viminfofile=$XDG_STATE_HOME/vim/viminfo
 
-
-if !has('nvim') | set viminfofile=$XDG_STATE_HOME/vim/viminfo | endif
 " Install vim-plug if not found
 if empty(glob('~/.config/vim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs
@@ -38,20 +32,17 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'ervandew/supertab'
-    Plug 'garbas/vim-snipmate'
     Plug 'jeffkreeftmeijer/vim-dim'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-sensible'
     Plug 'jiangmiao/auto-pairs'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'luochen1990/rainbow'
+    Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
-colorscheme dim
-
-set number
-set relativenumber
-
-set shiftwidth=4 smarttab
+set ts=4 sw=4 et
+set smarttab
 set expandtab
 set mouse=a
 set undofile
@@ -60,8 +51,49 @@ let &t_SI.="\e[6 q"
 let &t_SR.="\e[4 q"
 let &t_EI.="\e[2 q"
 
-" reset the cursor on start (for older versions of vim, usually not required)
-augroup myCmds
-au!
-autocmd VimEnter * silent !echo -ne "\e[2 q"
+" Keybinds
+let mapleader = " "
+nnoremap <leader>/ :CtrlP<cr>
+nnoremap <leader>ti :IndentGuidesToggle<cr>
+
+" LSP 
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Colorsheme
+set number
+set relativenumber
+set scl=no
+
+set notermguicolors
+set t_Co=16
+set background=dark
+
+let g:rainbow_active = 1
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+colorscheme dim
+function! s:Apply() abort
+    highlight SignColumn    ctermbg=NONE
+    highlight CocFloating   ctermbg=0
+    highlight CocMenuSel    ctermbg=5 ctermfg=7
+    highlight CocFloatThumb ctermbg=5
+endfunction
+
+augroup CustomHighlight
+    autocmd!
+    autocmd ColorScheme * call s:Apply()
+    autocmd VimEnter * call timer_start(100, { -> execute('call <SID>Apply()') })
 augroup END
