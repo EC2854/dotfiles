@@ -1,4 +1,4 @@
-set shell zsh
+# set shell zsh # it breaks $fx for some reason xD
 set hidden false
 set ignorecase true
 set icons true
@@ -6,11 +6,15 @@ set drawbox true
 set preview true
 set sixel true
 
+set promptfmt 
+set statfmt 
+
 set previewer ~/.config/lf/previewer
 
 set shellopts '-eu'
 
 set ifs "\n"
+set filesep "\n"
 set scrolloff 10
 
 # Zoxide integration
@@ -24,15 +28,17 @@ cmd zi ${{
     lf -remote "send $id cd \"$result\""
 }}
 
+cmd on-init &{{
+    fmt="$(STARSHIP_SHELL= starship prompt | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id set promptfmt \"$fmt\""
+    lf -remote "send $id set statfmt \"$(eza -ld --color=always "$f" | sed 's/\\/\\\\/g;s/"/\\"/g')\""
+}}
+# starship integration 
 cmd on-cd &{{
     zoxide add "$PWD"
+    fmt="$(STARSHIP_SHELL= starship prompt | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id set promptfmt \"$fmt\""
 }}
-
-# starship integration 
-# cmd on-cd &{{
-#     fmt="$(STARSHIP_SHELL= starship prompt | sed 's/\\/\\\\/g;s/"/\\"/g')"
-#     lf -remote "send $id set promptfmt \"$fmt\""
-# }}
 
 # Eza for a bottom line 
 cmd on-select &{{
@@ -87,8 +93,15 @@ cmd mk %{{
         touch "$ans"
     fi
 }}
-cmd set-exec &{{
-    ls -l $fx | awk -F ' ' '{print $1 }' | grep x && chmod -x $fx || chmod +x $fx
+# &
+cmd set-exec ${{
+    for file in $fx; do
+        if [ -x "$file" ];then  
+            chmod -x $file
+        else
+            chmod +x "$file" 
+        fi
+    done
     lf -remote 'send reload'
 }}
 cmd unarchive ${{
@@ -114,10 +127,8 @@ cmd open &{{
         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
-cmd trash %{{
-    trash-put -- $fx
-}}
 
+cmd trash %trash-put -- $fx
 
 cmd bulk-rename ${{
     old="$(mktemp)"
@@ -176,7 +187,7 @@ cmd change-preview &{{
 }}
 
 cmd set-wall &{{
-    swaymsg output "*" bg "$f" fill
+    matugen image "$f"
 }}
 cmd mount-drive ${{
     ~/.local/share/scripts/mount_removable.sh
@@ -229,4 +240,3 @@ map ga cd ~/.cache
 map gl cd ~/.local/share
 map gt cd ~/.local/share/Trash/files
 map gM ${{ lf -remote "send $id cd /run/media/$USER" }} 
-
