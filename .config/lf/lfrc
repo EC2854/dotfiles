@@ -82,8 +82,8 @@ cmd nnn-preview %{{
 # Custom stuff
 cmd mk %{{
     read ans
-    if grep "/" <<< "$ans"; then
-        if grep "/$" <<< "$ans"; then
+    if echo "$ans" | grep "/" ; then
+        if echo "$ans" | grep "/$"; then
             mkdir -p "$ans"
         else
             mkdir -p "$(dirname "$ans")"
@@ -176,9 +176,9 @@ cmd clipboard-paste &{{
 cmd share $curl -F"file=@$fx" -Fexpires=4 https://0x0.st | wl-copy
 
 cmd change-preview &{{
-    previewer=$(readlink -f ~/.config/lf/previewer)
+    previewer=$(realpath ~/.config/lf/previewer)
 
-    if grep -q "info" <<< "$previewer"; then
+    if echo "$previewer" | grep -q "info" ; then
         ln -sf ~/.config/lf/previewers/preview ~/.config/lf/previewer
     else
         ln -sf ~/.config/lf/previewers/info ~/.config/lf/previewer
@@ -187,7 +187,7 @@ cmd change-preview &{{
 }}
 
 cmd set-wall &{{
-    matugen image "$f"
+    swaymsg output "*" bg "$f" fill
 }}
 cmd mount-drive ${{
     ~/.local/share/scripts/mount_removable.sh
