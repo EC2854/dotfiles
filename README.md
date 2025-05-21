@@ -30,7 +30,7 @@
 - File Manager - [lf](https://github.com/gokcehan/lf)
 - IDE - [neovim](https://github.com/neovim/neovim)
 - Browser - [Zen](https://zen-browser.app)
-- Music Player - [kew](https://github.com/ravachol/kew)
+- Music Player - [rmpc](https://github.com/mierak/rmpc)
 - Wallpaper daemon - [swww](https://github.com/LGFae/swww)
 - Wallpapers - [Here :3](https://github.com/EC2854/wallpapers)
 - font - [Meslo LGL Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.tar.xz)

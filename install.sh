@@ -9,7 +9,7 @@ packages_needed=(
 )
 packages_to_install=(
     "hyprland" "mpvpaper" "swww" "mako" "polkit-kde-agent" "eww" "tofi" "hyprwayland-scanner" "hypridle" "hyprlock" "jq" "uwsm" "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk" # important stuff
-    "zsh" "eza" "fzf" "lf" "foot" "neovim" "fastfetch" "starship" "tmux" "kew" "zoxide" # terminal stuff
+    "zsh" "eza" "fzf" "lf" "foot" "neovim" "fastfetch" "starship" "tmux" "mpd" "mpd-mpris" "rmpc" "zoxide" # terminal stuff
     "noto-fonts-cjk" "ttf-noto-emoji-monochrome" # non nerd fonts
     "acpi" "inotify-tools" # optional - for laptop eww
 ) 
