@@ -9,7 +9,8 @@ set sixel true
 set promptfmt 
 set statfmt 
 
-set previewer ~/.config/lf/previewer
+#set previewer ~/.config/lf/previewer
+set previewer ~/.config/lf/previewers/preview_sandbox.sh
 
 set shellopts '-eu'
 

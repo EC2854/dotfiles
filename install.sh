@@ -77,6 +77,7 @@ copy() {
         mv "$destination" "$destination.bak"
         print_info "Moved existing $destination to $destination.bak"
     fi
+    mkdir -p "$destination"
     cp -rf "$source" "$destination" && print_success "Files copied successfully to $destination" || print_error "Error while copying to $destination"
 }
 install_modernz() {
