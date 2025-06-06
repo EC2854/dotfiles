@@ -22,6 +22,7 @@ This is my main setup. I use it on Arch Linux but it should work on most systems
 This is setup for my laptop running Alpine Linux.
 > [!WARNING]
 > This configuration is experimental and i don't recommended it unless you know what are you doing. 
+> I currently don't maintain this rice.
 
 ## Thank You
 
