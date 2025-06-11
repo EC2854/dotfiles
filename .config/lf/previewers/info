@@ -93,8 +93,7 @@ get_video_data() {
     local width=$(sed -n '2p' <<< "$data")
     local height=$(sed -n '3p' <<< "$data")
     local frame_rate=$(sed -n '4p' <<< "$data")
-    local duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 01A\ Re\ Zero\ kara\ Hajimeru\ Isekai\ Seikatsu.mkv
-)
+    local duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$file")
 
     frame_rate=$(awk "BEGIN {print $frame_rate/1}" <<< "$frame_rate")
 
