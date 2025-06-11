@@ -100,3 +100,6 @@
     --identity-icon-color: #cba6f7 !important;
   }
 }
+.zen-current-workspace-indicator {
+  display: none !important;
+}
