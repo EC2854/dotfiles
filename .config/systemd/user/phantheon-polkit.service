@@ -1,0 +1,11 @@
+[Unit]
+Description=Phantheon PolicyKit Authentication Agent (custom)
+PartOf=graphical-session.target
+After=graphical-session.target
+	
+[Service]
+ExecStart=/usr/lib/policykit-1-pantheon/io.elementary.desktop.agent-polkit 
+BusName=io.elementary.desktop.agent-polkit
+Slice=background.slice
+TimeoutStopSec=5sec
+Restart=on-failure

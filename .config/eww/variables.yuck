@@ -1,0 +1,29 @@
+(deflisten NIRI :initial "{}" "scripts/get_niri.sh")
+
+(defvar music_rev false)
+(defvar music_box_rev false)
+(deflisten MUSIC :initial "{}" "~/.config/eww/scripts/get_music.sh")
+(deflisten music_icon :initial "" "~/.config/eww/scripts/get_music_state.sh")
+
+(deflisten systray-items-count :initial 0 "~/.config/eww/scripts/get_systray.sh")
+
+(deflisten AUDIO :initial "{}" "~/.config/eww/scripts/get_audio.sh")
+
+(defvar volume_rev false)
+(defvar mic_rev false)
+(defvar brightness_rev false)
+(defvar battery_rev false)
+
+(defvar volume_muted false)
+(defvar mic_muted false)
+(defvar battery_low false)
+
+(defpoll BATTERY :interval "2s" "~/.config/eww/scripts/get_battery.sh")
+(deflisten BRIGHTNESS :initial "{}" "~/.config/eww/scripts/get_brightness.sh")
+
+(defpoll clock_hour :interval "10s" "date +%H")
+(defpoll clock_minute :interval "5s" "date +%M")
+
+(defpoll calendar_day :interval "1h" "date '+%d'")
+(defpoll calendar_month :interval "1h" "date '+%m'")
+(defpoll calendar_year :interval "1h" "date '+%Y'")

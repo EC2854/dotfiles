@@ -1,0 +1,10 @@
+.clock {
+  color: $primary;
+  &:hover {
+    background-color: $primary;
+    color: $primary_text
+  }
+  & > * > * {
+    font-size: 22px;
+  }
+}

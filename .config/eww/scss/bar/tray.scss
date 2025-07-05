@@ -1,0 +1,32 @@
+.tray {
+    font-family: "MesloLGL Nerd Font Mono";
+    &_button {
+        min-height: 30px;
+        min-width: 30px;
+        border-radius: 15px;
+        margin-top: 4px;
+        &:hover {
+           color: $primary_text;
+           background-color: $primary;
+        }
+        &.muted {
+           color: $error_text;
+           background-color: $error;
+        }
+        & > * {
+            font-size: 18px;
+        }
+    }
+}
+.slider trough {
+  background-color: $surface_highest;
+  border-radius: 15px;
+  min-height: 100px;
+  min-width: 15px;
+  margin: 4px;
+}
+.slider trough highlight {
+  background-color: $primary;
+  border-radius: 15px;
+  min-height: 20px;
+}

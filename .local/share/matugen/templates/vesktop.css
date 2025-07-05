@@ -1,0 +1,154 @@
+/*
+ * @name midnight (matugen mod)
+ * @description a dark, customizable discord theme. based. 
+ * @author refact0r
+ * @version 2.1.1
+*/
+
+/* import theme modules */
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+body {
+    /* font, change to '' for default discord font */
+    --font: 'figtree'; /* change to '' for default discord font */
+    --code-font: ''; /* change to '' for default discord font */
+    font-weight: 400 /* normal text font weight. DOES NOT AFFECT BOLD TEXT */;
+
+    /* sizes */
+    --gap: 8px; /* spacing between panels */
+    --divider-thickness: 4px; /* thickness of unread messages divider and highlighted message borders */
+    --border-thickness: 1px; /* thickness of borders around main panels. DOES NOT AFFECT OTHER BORDERS */
+
+    /* animation/transition options */
+    --animations: on; /* off: disable animations/transitions, on: enable animations/transitions */
+    --list-item-transition: 0.2s ease; /* transition for list items */
+    --dms-icon-svg-transition: 0.4s ease; /* transition for the dms icon */
+    --border-hover-transition: 0.2s ease; /* transition for borders when hovered */
+
+    /* top bar options */
+    --top-bar-height: var(--gap); /* height of the top bar (discord default is 36px, old discord style is 24px, var(--gap) recommended if button position is set to titlebar) */
+    --top-bar-button-position: hide; /* off: default position, hide: hide buttons completely, serverlist: move inbox button to server list, titlebar: move inbox button to channel titlebar (will hide title) */
+    --top-bar-title-position: hide; /* off: default centered position, hide: hide title completely, left: left align title (like old discord) */
+    --subtle-top-bar-title: off; /* off: default, on: hide the icon and use subtle text color (like old discord) */
+
+    /* window controls */
+    --custom-window-controls: on; /* off: default window controls, on: custom window controls */
+    --window-control-size: 14px; /* size of custom window controls */
+
+    /* dms button options */
+    --custom-dms-icon: custom; /* off: use default discord icon, hide: remove icon entirely, custom: use custom icon */
+    --dms-icon-svg-url: url('https://refact0r.github.io/midnight-discord/assets/Font_Awesome_5_solid_moon.svg'); /* icon svg url. MUST BE A SVG. */
+    --dms-icon-svg-size: 90%; /* size of the svg (css mask-size property) */
+    --dms-icon-color-before: var(--icon-secondary); /* normal icon color */
+    --dms-icon-color-after: var(--white); /* icon color when button is hovered/selected */
+    --custom-dms-background: off; /* off to disable, image to use a background image (must set url variable below), color to use a custom color/gradient */
+    --dms-background-image-url: url(''); /* url of the background image */
+    --dms-background-image-size: cover; /* size of the background image (css background-size property) */
+    /* background image options */
+    --background-image: off; /* off: no background image, on: enable background image (must set url variable below) */
+    --background-image-url: url(''); /* url of the background image */
+
+    /* transparency/blur options */
+    /* NOTE: TO USE TRANSPARENCY/BLUR, YOU MUST HAVE TRANSPARENT BG COLORS. FOR EXAMPLE: --bg-4: hsla(220, 15%, 10%, 0.7); */
+    --transparency-tweaks: off; /* off: no changes, on: remove some elements for better transparency */
+    --remove-bg-layer: off; /* off: no changes, on: remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
+    --panel-blur: off; /* off: no changes, on: blur the background of panels */
+    --blur-amount: 12px; /* amount of blur */
+    --bg-floating: var(--bg-3); /* set this to a more opaque color if floating panels look too transparent. only applies if panel blur is on  */
+
+    /* chatbar options */
+    --custom-chatbar: aligned; /* off: default chatbar, aligned: chatbar aligned with the user panel, separated: chatbar separated from chat */
+    --chatbar-height: 47px; /* height of the chatbar (52px by default, 47px recommended for aligned, 56px recommended for separated) */
+    --chatbar-padding: 8px; /* padding of the chatbar. only applies in aligned mode. */
+
+    /* other options */
+    --small-user-panel: off; /* off: default user panel, on: smaller user panel like in old discord */
+}
+
+/* color options */
+:root {
+    --colors: on;
+
+    /* text colors */
+    --text-0: var(--bg-3);
+    --text-1: {{colors.on_surface_variant.default.hex}};
+    --text-2: {{colors.on_surface_variant.default.hex}};
+    --text-3: {{colors.on_surface.default.hex}};
+    --text-4: {{colors.on_surface.default.hex}};
+    --text-5: {{colors.on_surface.default.hex}};
+
+    /* background and dark colors */
+    --bg-1: {{colors.surface_container_highest.default.hex}};
+    --bg-2: {{colors.surface_container_high.default.hex}};
+    --bg-3: {{colors.surface_container.default.hex}};
+    --bg-4: {{colors.surface.default.hex}};
+    --hover:{{colors.surface_container_highest.default.hex}};
+    --active: {{colors.surface_container_high.default.hex}}; 
+    --active-2: {{colors.surface_container_highest.default.hex}}; 
+    --message-hover: #0000001a;
+
+    /* accent colors */
+    --accent-1: {{colors.primary.default.hex}};
+    --accent-2: color-mix(in srgb, {{colors.primary.default.hex}} 90%, black);
+    --accent-3: color-mix(in srgb, {{colors.primary.default.hex}} 85%, black);
+    --accent-4: color-mix(in srgb, {{colors.primary.default.hex}} 80%, black);
+    --accent-5: color-mix(in srgb, {{colors.primary.default.hex}} 75%, black);
+    --accent-new: var(--accent-2);
+    --mention: linear-gradient(to right, color-mix(in hsl, var(--accent-2), transparent 90%) 40%, transparent);
+    --mention-hover: linear-gradient(to right, color-mix(in hsl, var(--accent-2), transparent 95%) 40%, transparent);
+    --reply: linear-gradient(to right, color-mix(in hsl, var(--text-3), transparent 90%) 40%, transparent);
+    --reply-hover: linear-gradient(to right, color-mix(in hsl, var(--text-3), transparent 95%) 40%, transparent);
+
+    /* status indicator colors */
+    --online: var(--green-2);
+    --dnd: var(--red-2);
+    --idle: var(--yellow-2);
+    --streaming: var(--purple-2);
+    --offline: var(--text-4);
+
+    /* border colors */
+    --border-light: var(--hover);
+    --border: var(--active);
+    --border-hover: var(--active);
+    --button-border: #ffffff1a; /* rgba(255, 255, 255, 0.1) */
+
+    /* base colors */
+    --red-1: #f29ca4;
+    --red-2: #ef8c95;
+    --red-3: #ef8c95;
+    --red-4: #ec7c86;
+    --red-5: #e96c76;
+
+    --green-1: #b2ecb2;
+    --green-2: #a0e7a0;
+    --green-3: #a0e7a0;
+    --green-4: #8de28d;
+    --green-5: #7bdc7b;
+
+    --blue-1: #9eddf5;
+    --blue-2: #89d6f3;
+    --blue-3: #89d6f3;
+    --blue-4: #74cff1;
+    --blue-5: #5fc7ef;
+
+    --yellow-1: #fceec1;
+    --yellow-2: #fbe6a3;
+    --yellow-3: #fbe6a3;
+    --yellow-4: #fadc85;
+    --yellow-5: #f9d368;
+
+    --purple-1: #e0d0f9;
+    --purple-2: #d1b2f6;
+    --purple-3: #d1b2f6;
+    --purple-4: #c294f3;
+    --purple-5: #b376f0;
+}
+.container__4bbc6 {
+  background: linear-gradient(90deg,rgba(42, 123, 155, 0) 0%, rgba(237, 221, 83, 0) 100%) !important;
+}
+.videoContainer__4bbc6 {
+  mask-image: none !important;
+}
+.img__4bbc6 {
+  display: none;
+}

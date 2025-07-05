@@ -1,0 +1,57 @@
+format="""
+[](bg:none fg:#eeb4ea)\
+$username\
+[](bg:#eeb4ea fg:#d9bfd4)\
+$hostname\
+[](bg:#d9bfd4 fg:#eeb4ea)\
+$directory\
+[](bg:#d9bfd4 fg:#eeb4ea)\
+$git_branch\
+[](bg:#eeb4ea fg:#d9bfd4)\
+$cmd_duration\
+[](bg:none fg:#eeb4ea)\
+$line_break\
+$character\
+"""
+add_newline = false 
+
+# Prompt symbols 
+[character]
+success_symbol = "[](#eeb4ea)"
+error_symbol = "[](#d9bfd4)"
+vicmd_symbol = "[](#d9bfd4)"
+
+[username]
+disabled = true
+show_always = true
+format = "[  $user ](bg:#eeb4ea fg:#4a204b bold)"
+
+[hostname]
+disabled = true
+ssh_only = false
+format = "[ 󰌽 $hostname ]( bg:#d9bfd4 fg:#3c2b3b bold)"
+
+[directory]
+disabled =false
+format = "[  $path ](bg:#eeb4ea fg:#4a204b bold)"
+truncation_length = 3
+truncate_to_repo=true
+
+[directory.substitutions]
+"Documents" = "󰈙"
+"Downloads" = ""
+"Music" = ""
+"Pictures" = ""
+"Videos" = ""
+"iso" = "󰌽"
+".config" = ""
+
+[git_branch]
+disabled =false
+format = '[  $branch ](bg:#d9bfd4 fg:#3c2b3b bold)'
+
+[cmd_duration]
+min_time = 4
+show_milliseconds = false
+disabled = true
+format = '[ 󱑆 $duration ](bg:#eeb4ea fg:#4a204b bold)'

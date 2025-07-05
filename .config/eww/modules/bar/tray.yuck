@@ -1,0 +1,44 @@
+(defwidget tray[]
+    (box :class "bean tray" :space-evenly "false" :orientation "v" :spacing "3" 
+        (eventbox :onscroll "scripts/change_volume.sh {} SINK" :onhover "eww update volume_rev=true" :onhoverlost 'eww update volume_rev=false'
+            (box :space-evenly "false" :orientation "v" :tooltip "Volume: ${AUDIO.volume_value}%"
+                (revealer :transition "slidedown" :reveal volume_rev :duration "350ms"
+                    (scale :min 0 :max 100 :orientation "v" :flipped true :value "${AUDIO.volume_value}" :onchange "scripts/change_volume.sh {} SINK" :class "slider")
+                )
+                (button :onclick "wpctl set-mute @DEFAULT_SINK@ toggle" :class 'tray_button ${volume_muted ? "muted" : ""}'
+                    (label  :text "${AUDIO.volume_icon}")
+                )
+            )
+        )
+        (eventbox :onscroll "scripts/change_volume.sh {} SOURCE" :onhover "eww update mic_rev=true" :onhoverlost 'eww update mic_rev=false'
+            (box :space-evenly "false" :orientation "v" :tooltip "Microphone: ${AUDIO.mic_value}%"
+                (revealer :transition "slidedown" :reveal mic_rev :duration "350ms"
+                    (scale :min 0 :max 100 :orientation "v" :flipped true :value "${AUDIO.mic_value}" :onchange "scripts/change_volume.sh {} SOURCE" :class "slider")
+                )
+                (button :onclick "wpctl set-mute @DEFAULT_SOURCE@ toggle" :class 'tray_button ${mic_muted ? "muted" : ""}' 
+                    (label :text "${AUDIO.mic_icon}")
+                )
+            )
+        )
+        (eventbox :onscroll "scripts/change_brightness.sh {}" :onhover "eww update brightness_rev=true" :onhoverlost 'eww update brightness_rev=false'
+            (box :space-evenly "false" :orientation "v" :tooltip "Brightness: ${BRIGHTNESS.value}%"
+                (revealer :transition "slidedown" :reveal brightness_rev :duration "350ms"
+                    (scale :min 0 :max 100 :orientation "v" :flipped true :value "${BRIGHTNESS.value}" :onchange "brightnessctl set {}%" :class "slider")
+                )
+                (button :class 'tray_button' 
+                    (label :text "${BRIGHTNESS.icon}")
+                )
+            )
+        )
+        (eventbox :onhover "eww update battery_rev=true" :onhoverlost 'eww update battery_rev=false'
+            (box :space-evenly "false" :orientation "v" :tooltip "Battery: ${BATTERY.value}%"
+                (revealer :transition "slidedown" :reveal battery_rev :duration "350ms"
+                    (scale :min 0 :max 100 :orientation "v" :flipped true :value "${BATTERY.value}" :class "slider" )
+                )
+                (button :class 'tray_button ${battery_low ? "muted" : ""}' 
+                    (label :text "${BATTERY.icon}")
+                )
+            )
+        )
+    )
+)

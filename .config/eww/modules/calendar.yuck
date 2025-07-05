@@ -1,0 +1,31 @@
+(defwidget cal []
+    (box :orientation "v" :space-evenly false
+        (box :class "music-box" :orientation "v" :space-evenly false :visible "${MUSIC.title == '' ? false : true}"
+            (box :orientation "h" :space-evenly false
+                (eventbox :onhover "eww update music_box_rev=true" :onhoverlost 'eww update music_box_rev=false' :onscroll "scripts/change_music.sh"
+                    (button :style "background-image: url('${MUSIC.cover}');" :class "music-cover" :onclick "playerctl play-pause"
+                        (revealer :transition "fade" :reveal music_box_rev :duration "300ms"
+                            (label :class "music_icon" :text music_icon)
+                        )
+                    )
+                )
+                (box :orientation "v" :class "music-title-box" :space-evenly false
+                    (label :text "${MUSIC.title}" :halign "start")
+                    (label :text "${MUSIC.artist}" :class "music-artist" :halign "start")
+                )
+            )
+            (box :orientation "h" :space-evenly false :halign "center"
+                (button :onclick "playerctl previous" :class "music-control"
+                    (label :text "󰒮")
+                )
+                (scale :min 0 :max "${MUSIC.duration}" :value "${MUSIC.position}" :class "music-slider")
+                (button :onclick "playerctl next" :class "music-control"
+                    (label :text "󰒭")
+                )
+            )
+        )
+        (box :class "cal-box" :orientation "v"
+            (calendar :class "cal")
+        )
+    )
+)

@@ -1,0 +1,1 @@
+export FZF_DEFAULT_OPTS="--color=bg+:#171216,bg:#171216,spinner:#eeb4ea,hl:#d9bfd4,fg:#ebdfe6,header:#2e282d,info:#d9bfd4,pointer:#eeb4ea,marker:#eeb4ea,fg+:#ebdfe6,prompt:#eeb4ea,hl+:#eeb4ea --no-scrollbar --no-hscroll --prompt ' ' --pointer '' --marker '' --ansi --reverse --tmux=80%"

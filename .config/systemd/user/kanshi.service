@@ -1,0 +1,10 @@
+[Unit]
+Description=kanshi - dynamic output configuration
+
+[Service]
+ExecStart=kanshi
+ExecReload=kanshictl reload
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

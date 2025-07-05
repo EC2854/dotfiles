@@ -1,0 +1,20 @@
+profile default {
+    output eDP-1 enable mode 1920x1080@60Hz position 0,0
+}
+profile laptop-only {
+    output eDP-1 enable mode 1920x1080@60Hz position 0,0
+    output HDMI-A-2 disable
+}
+profile monitor-only {
+    output eDP-1 disable
+    output HDMI-A-2 enable
+}
+profile mirror {
+    output eDP-1 enable mode 1920x1080 position 0,0
+    output HDMI-A-2 enable mode 1920x1080 position 1920,1080 
+    exec wl-present mirror eDP-1 --fullscreen-output HDMI-A-2 --fullscreen
+}
+profile extend {
+    output eDP-1 enable mode 1920x1080@60Hz position 0,0
+    output HDMI-A-2 enable mode 2560x1080@100Hz position 1920,0
+}

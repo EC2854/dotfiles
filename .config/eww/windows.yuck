@@ -1,0 +1,13 @@
+(defwindow bar
+    :monitor 0
+    :geometry (geometry :height "100%" :width "72px" :anchor "left center")
+    :exclusive true
+    :namespace "eww"
+    (bar)
+)
+(defwindow calendar 
+    :monitor 0
+    :geometry (geometry :x "4px" :y "8px"  :width "270px" :height "60px" :anchor "left bottom") 
+    :namespace "eww"
+    (cal)
+)

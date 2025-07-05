@@ -1,0 +1,5 @@
+(defwidget launcher[]
+    (button :onclick "niri msg action toggle-overview" :class 'bean launcher launcher_button${NIRI.overview ? "_active" : ""}'
+        (label :text " ")
+    )
+)

@@ -1,0 +1,8 @@
+(defwidget clock[]
+    (button :class "bean clock" :onclick "eww close calendar || eww open calendar" :onhover "eww update volume_rev=true" 
+        (box :space-evenly "false" :orientation "v" :spacing "3" 
+            (label :text clock_hour)
+            (label :text clock_minute)
+        )
+    )
+)
