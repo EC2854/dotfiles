@@ -4,7 +4,7 @@ selected_device=$(lsblk -Al -o NAME,SIZE,TYPE,LABEL,MOUNTPOINT,RM -J | jq -r '
     .blockdevices[] |
     select(.rm == true and .type == "part") | 
     "\(.label // .name)\t(\(.name))\t\(.size)\t\(.mountpoint // "Not mounted")"
-    ' | fzf)
+    ' | fzf --input-label="Mount Drive")
 
 if [ -n "$selected_device" ]; then
     device_name=$(echo "$selected_device" | awk -F'\t' '{print $2}' | tr -d "()")

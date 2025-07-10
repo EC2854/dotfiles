@@ -55,10 +55,6 @@ output_path = '~/.config/fuzzel/colors.ini'
 input_path = '~/.local/share/matugen/templates/eww.scss'
 output_path = '~/.config/eww/scss/colors.scss'
 
-[templates.fzf]
-input_path = '~/.local/share/matugen/templates/fzf.zsh'
-output_path = '~/.config/zsh/fzf-style.zsh'
-
 [templates.icons]
 input_path = '~/.local/share/matugen/templates/icons.txt'
 output_path = '/tmp/icons.txt'
