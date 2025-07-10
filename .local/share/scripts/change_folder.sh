@@ -24,7 +24,7 @@ hex_to_rgb() {
 color_distance() {
     local r1=$1 g1=$2 b1=$3
     local r2=$4 g2=$5 b2=$6
-    bc <<< "($r1 - $r2)^2 + ($g1 - $g2)^2 + ($b1 - $b2)^2"
+    echo "$(( (r1 - r2) * (r1 - r2) + (g1 - g2) * (g1 - g2) + (b1 - b2) * (b1 - b2) ))"
 }
 
 # Pick the closest color

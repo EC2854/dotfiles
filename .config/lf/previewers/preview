@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-file="$1"
-w="$2"
-h="$3"
-x="$4"
-y="$5"
+file=$1
+w=$2
+h=$3
 
 thumbnail=~/.cache/lf/thumbnail.png # Set path to a temp image
 max_lines=65  # Set the maximum number of lines to display
@@ -24,7 +22,6 @@ generate_spectogram() {
 
 show_image() {
     chafa -f sixel -s "${w}x${h}" --animate off --polite on "$1" &
-    # kitten icat --stdin no --transfer-mode memory --place "${w}x${h}@${x}x${y}" "$1" </dev/null >/dev/tty
 }
 show_code() {
     timeout $timeout_duration bat --paging=never --style=numbers --theme=base16 --wrap=auto --terminal-width "$((w-5))" -f "$1" | head -n $max_lines

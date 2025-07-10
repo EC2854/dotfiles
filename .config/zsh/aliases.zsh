@@ -18,6 +18,8 @@ alias sv='sudoedit'
 alias s='sudo'
 alias rg='rg -p' 
 alias cls='clear'
+alias cp='cp -v'
+alias mv='mv -v'
 alias rm='trash-put'
 
 # adding some colors :3
@@ -33,16 +35,19 @@ alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
-alias gr='cd /'
-alias gh='cd ~'
-alias gc='cd ~/.config/'
-alias gd='cd ~/Documents/'
-alias gD='cd ~/Downloads/'
-alias gm='cd ~/Music/'
-alias gp='cd ~/Pictures/'
-alias gv='cd ~/Videos/'
+alias .a='cd ~/.cache'
+alias .c='cd ~/.config'
+alias .d='cd ~/Documents'
+alias .D='cd ~/Downloads'
+alias .h='cd ~'
+alias .l='cd ~/.local/share'
+alias .m='cd ~/Music'
+alias .M='cd /run/media/$USER'
+alias .p='cd ~/Pictures'
+alias .r='cd ~/Repos'
+alias .t='cd ~/.local/share/Trash/files'
+alias .v='cd ~/Videos'
 
-# Even faster movement
 alias f='cd "$(find . -maxdepth 5 -type d -print | fzf --preview "eza --icons=always --color=always --group-directories-first -1 {}")"' 
 alias gf='cd "$(find ~ -maxdepth 5 -type d -print | fzf --preview "eza --icons=always --color=always --group-directories-first -1 {}")"'
 
@@ -80,11 +85,12 @@ alias toggle-host='starship toggle hostname'
 alias toggle-dir='starship toggle directory'
 alias toggle-git='starship toggle git_branch'
 alias toggle-duration='starship toggle cmd_duration'
-alias chprompt='~/.config/zsh/scripts/changeprompt.sh'
 
-
-alias commit='git add . && git commit -m $1'
-alias push='git push -u origin main'
+alias ga="git add . && git status"
+alias gc="git commit -m"
+alias gp="git push"
+alias gco="git checkout"
+alias gpu="git pull"
 
 # Silly
 alias fucking='sudo'

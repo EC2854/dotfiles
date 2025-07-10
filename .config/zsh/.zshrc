@@ -112,7 +112,7 @@ bindkey '^[[B' history-substring-search-down
 # Completion settings
 zstyle ':completion:*' menu select
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:*' fzf-flags  $(awk -F ' ' '{print $1}' <<< ${FZF_DEFAULT_OPTS}) --no-scrollbar --no-hscroll --prompt ' ' --pointer '' --marker ''
+zstyle ':fzf-tab:*' fzf-flags --color='bg:-1,bg+:-1,border:7,fg:7,fg+:4,header:4,prompt:7,hl:4,hl+:7,marker:4,pointer:4,spinner:4,info:7,label:4'  --no-scrollbar --no-hscroll --prompt ' ' --pointer '' --marker ''
 zstyle ':fzf-tab:*' popup-min-size 80 12
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always --color=always --group-directories-first -a -1 $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --icons=always --color=always --group-directories-first -a -1 $realpath'

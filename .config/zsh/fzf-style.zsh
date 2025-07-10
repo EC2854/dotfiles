@@ -1,1 +1,1 @@
-export FZF_DEFAULT_OPTS="--color=bg+:#171216,bg:#171216,spinner:#eeb4ea,hl:#d9bfd4,fg:#ebdfe6,header:#2e282d,info:#d9bfd4,pointer:#eeb4ea,marker:#eeb4ea,fg+:#ebdfe6,prompt:#eeb4ea,hl+:#eeb4ea --no-scrollbar --no-hscroll --prompt ' ' --pointer '' --marker '' --ansi --reverse --tmux=80%"
+export FZF_DEFAULT_OPTS="--color='bg:-1,bg+:-1,border:4,fg:7,fg+:4,header:4,prompt:7,hl:4,hl+:7,marker:4,pointer:4,spinner:4,info:7,label:4' --style=full --padding '1,2' --no-scrollbar --no-hscroll --prompt ' ' --pointer ' ' --marker ' ' --tmux=80%  --ansi"

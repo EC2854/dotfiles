@@ -9,8 +9,8 @@ set sixel true
 set promptfmt 
 set statfmt 
 
-set previewer ~/.config/lf/previewer
-#set cleaner ~/.config/lf/cleaner.sh
+#set previewer ~/.config/lf/previewer
+set previewer ~/.config/lf/previewers/preview_sandbox.sh
 
 set shellopts '-eu'
 
@@ -48,7 +48,7 @@ cmd on-select &{{
 
 # fzf stuff
 cmd fzf-jump ${{
-    res="$(find . -maxdepth 5 | fzf --header='Jump to location' --preview='eza --icons=always --color=always --group-directories-first -1 {}')"
+    res="$(find . -maxdepth 5 | fzf --input-label='Jump to location' --preview='eza --icons=always --color=always --group-directories-first -1 {}')"
     if [ -f "$res" ]; then
         cmd="select"
     elif [ -d "$res" ]; then
