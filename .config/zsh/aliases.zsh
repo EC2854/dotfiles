@@ -2,7 +2,6 @@
 # this file in sourced in .zshrc and .bashrc
 
 # lf stuff
-alias lf=lfwrapper.sh
 lfcd() {
     dir="$(lf -print-last-dir "$@")"
     while ! cd "$dir" 2>/dev/null; do

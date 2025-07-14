@@ -48,6 +48,7 @@ cmd on-select &{{
 
 # fzf stuff
 cmd fzf-jump ${{
+    source ~/.config/zsh/fzf-style.zsh
     res="$(find . -maxdepth 5 | fzf --input-label='Jump to location' --preview='eza --icons=always --color=always --group-directories-first -1 {}')"
     if [ -f "$res" ]; then
         cmd="select"
@@ -57,6 +58,7 @@ cmd fzf-jump ${{
     lf -remote "send $id $cmd \"$res\""
 }}
 cmd fzf-search ${{
+    source ~/.config/zsh/fzf-style.zsh
     cmd="rg --column --line-number --no-heading --color=always --smart-case"
     fzf --ansi --disabled --layout=reverse --header="Search in files" --delimiter=: \
         --bind="start:reload([ -n {q} ] && $cmd -- {q} || true)" \
@@ -191,15 +193,9 @@ cmd set-wall &{{
     matugen image "$f"
 }}
 cmd mount-drive ${{
+    source ~/.config/zsh/fzf-style.zsh
     ~/.local/share/scripts/mount_removable.sh
 }}
-cmd mount-archive ${{
-    mntdir="$f.mnt"
-    mkdir -p -- "$mntdir"
-    archivemount "$f" "$mntdir"
-    lf -remote "send $id cd \"$(printf '%s' "$mntdir" | sed 's/\\/\\\\/g;s/"/\\"/g')\""
-}}
-
 map i change-preview
 
 map R bulk-rename
@@ -217,7 +213,6 @@ map um mount
 
 map m
 map md mount-drive
-map ma mount-archive
 
 map mm nnn-mode
 map mp nnn-preview
