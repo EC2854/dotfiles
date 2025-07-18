@@ -1,34 +1,64 @@
 local options = {
-    backup = false,
-    clipboard = "unnamedplus",
-    cmdheight = 1,
-    completeopt = { "menuone", "noselect" },
-    fileencoding = "utf-8",
-    hlsearch = true,
-    ignorecase = true,
-    mouse = "a",
-    pumheight = 10,
-    showmode = false,
-    splitbelow = true,
-    termguicolors = true,
-    splitright = true,
-    swapfile = false,
-    timeoutlen = 1000,
-    undofile = true,
-    updatetime = 300,
-    writebackup = false,
-    expandtab = true,
-    shiftwidth = 4,
-    tabstop = 4,
-    cursorline = true,
     number = true,
     relativenumber = true,
-    numberwidth = 4,
-    signcolumn = "yes",
+    cursorline = true,
     wrap = true,
     scrolloff = 8,
     sidescrolloff = 8,
+
+    tabstop = 4,
+    shiftwidth = 4,
+    softtabstop = 4,
+    expandtab = true,
+    smartindent = true,
+    autoindent = true,
+
+    ignorecase = true,
+    smartcase = true,      
+    hlsearch = true,
+    incsearch = true,
+
+    termguicolors = true,
+    signcolumn = "yes",
+    showmatch = true,
+    matchtime = 2,
+    cmdheight = 1,
+    completeopt = { "menuone","noinsert","noselect" },
+    showmode = false,
+    pumheight = 10,
+    pumblend = 10,
+    winblend = 0,
+    conceallevel = 0,
+    concealcursor = "",
+    lazyredraw = true,
+    synmaxcol = 300,
+
+    backup = false,
+    writebackup = false,
+    swapfile = false,
+    undofile = true,
+    updatetime = 300,
+    timeoutlen = 500,
+    ttimeoutlen = 0,
+    autoread = true,
+    autowrite = false,
+
+    autochdir = false,
+    hidden = true,
+    errorbells = false,
+    backspace = {"indent","eol","start"},
+    selection = "exclusive",
+    mouse = "a",
+    modifiable = true,
+    clipboard = "unnamedplus",
+    encoding = "UTF-8",
+
+    splitbelow = true,
+    splitright = true,
 }
+
+vim.opt.iskeyword:append("-")
+vim.opt.path:append("**")
 
 vim.opt.shortmess:append "c"
 vim.loader.enable()
@@ -36,6 +66,3 @@ vim.loader.enable()
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
-
-
-

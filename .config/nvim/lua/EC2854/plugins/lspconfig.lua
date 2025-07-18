@@ -3,6 +3,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
+        "nvim-lua/plenary.nvim",
         { "antosha417/nvim-lsp-file-operations", config = true },
     },
     config = function()
@@ -62,5 +63,8 @@ return {
             local hl = "DiagnosticSign" .. type
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
+        require("lspconfig").qmlls.setup {
+          cmd = {"qmlls", "-E"}
+        }
     end,
 }

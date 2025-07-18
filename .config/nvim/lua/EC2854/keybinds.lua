@@ -25,13 +25,12 @@ bind("n", "<C-j>", "<C-w>j", opts)
 bind("n", "<C-k>", "<C-w>k", opts)
 bind("n", "<C-l>", "<C-w>l", opts)
 
-bind("n", "<S-l>", ":bnext<CR>", opts)
-bind("n", "<S-h>", ":bprevious<CR>", opts)
 
-
-bind("n", "j", "gj", opts)
-bind("n", "k", "gk", opts)
---toggles
+-- center 
+bind("n", "n", "nzzzv", { desc = "Next search result (centered)" })
+bind("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
+bind("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
+bind("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 
 -- Resize
 bind("n", "<A-h>", ":vertical resize +2<CR>", opts)
