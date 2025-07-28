@@ -8,7 +8,7 @@ require("which-key").setup({
 })
 
 vim.keymap.set("n", "<leader>/", function() require('fzf-lua').files() end, { desc = "Open File", nowait = true })
-vim.keymap.set("n", "<leader>n", "<cmd>edit .<CR>", { desc = "File Manager", nowait = true })
+vim.keymap.set("n", "<leader>n", function () require('oil').toggle_float() end, { desc = "File Manager", nowait = true })
 vim.keymap.set("n", "<leader>u", function() vim.pack.update() end, { desc = "Update plugins", nowait = true })
 
 vim.keymap.set("n", "<leader>fc", function() require('fzf-lua').zoxide() end, { desc = "Change directory (zoxide)", nowait = true })

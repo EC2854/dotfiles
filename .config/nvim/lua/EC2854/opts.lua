@@ -4,6 +4,7 @@ vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.o.termguicolors = true
 vim.o.wrap = false
+vim.o.cursorline = true
 
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
@@ -31,3 +32,5 @@ vim.o.ttimeoutlen = 0
 vim.o.undofile = true
 vim.o.updatetime = 300
 vim.o.writebackup = false
+
+vim.cmd("set completeopt+=noselect")
