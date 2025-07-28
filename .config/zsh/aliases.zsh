@@ -90,6 +90,7 @@ alias gc="git commit -m"
 alias gp="git push"
 alias gco="git checkout"
 alias gpu="git pull"
+alias gs="git status"
 
 # Silly
 alias fucking='sudo'
