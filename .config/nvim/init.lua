@@ -1,13 +1,12 @@
-vim.pack.add({
-    { src = "https://github.com/ibhagwan/fzf-lua" },
-})
+require("config.cmp")
+require("config.file_manager")
+require("config.fzf")
+require("config.git")
+require("config.look")
+require("config.lsp")
+require("config.opts")
+require("config.terminal")
+require("config.treesitter")
 
-require("EC2854.cmp")
-require("EC2854.colorscheme")
-require("EC2854.file_manager")
-require("EC2854.lsp")
-require("EC2854.opts")
-require("EC2854.terminal")
-require("EC2854.treesitter")
-
-require("EC2854.keybinds")
+require("config.colorscheme")
+require("config.keybinds")

@@ -207,7 +207,7 @@ animations {
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
+    slowdown 0.4
 }
 
 // Open the zen picture-in-picture player as floating by default.
@@ -481,5 +481,5 @@ workspace "dev"
 workspace "browser"
 workspace "chat"
 
+spawn-at-startup "kanshi"
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"

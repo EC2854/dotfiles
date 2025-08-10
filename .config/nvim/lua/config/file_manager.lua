@@ -10,10 +10,10 @@ require("oil").setup({
     float = {
         preview_split = "right",
         win_options = {
-              number = true,
-              relativenumber = true,
-              signcolumn = "no",
-              cursorline = true,
+            number = true,
+            relativenumber = true,
+            signcolumn = "no",
+            cursorline = true,
         }
     },
     delete_to_trash = false,

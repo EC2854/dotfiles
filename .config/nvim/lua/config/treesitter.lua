@@ -5,5 +5,12 @@ vim.pack.add({
     { src = "https://github.com/HiPhish/rainbow-delimiters.nvim" },
 })
 require "nvim-treesitter.configs".setup({
-    highlight = { enable = true }
+    highlight = { enable = true },
+    auto_install = true,
+})
+require("ibl").setup()
+require("colorizer").setup({
+    user_default_options = {
+        names = false
+    }
 })

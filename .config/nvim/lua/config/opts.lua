@@ -5,6 +5,7 @@ vim.o.winborder = "rounded"
 vim.o.termguicolors = true
 vim.o.wrap = false
 vim.o.cursorline = true
+vim.o.showmode = false
 
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4

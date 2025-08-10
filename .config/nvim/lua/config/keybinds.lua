@@ -9,11 +9,12 @@ require("which-key").setup({
 
 vim.keymap.set("n", "<leader>/", function() require('fzf-lua').files() end, { desc = "Open File", nowait = true })
 vim.keymap.set("n", "<leader>n", function () require('oil').toggle_float() end, { desc = "File Manager", nowait = true })
-vim.keymap.set("n", "<leader>u", function() vim.pack.update() end, { desc = "Update plugins", nowait = true })
+vim.keymap.set("n", "<leader>u", function() vim.pack.update(nil, { force = true }) end, { desc = "Update plugins", nowait = true })
 
 vim.keymap.set("n", "<leader>fc", function() require('fzf-lua').zoxide() end, { desc = "Change directory (zoxide)", nowait = true })
 vim.keymap.set("n", "<leader>fl", function() require('fzf-lua').live_grep() end, { desc = "Live grep", nowait = true })
 vim.keymap.set("n", "<leader>fr", function() require('fzf-lua').oldfiles() end,  { desc = "Open recent file", nowait = true })
+vim.keymap.set("n", "<leader>ft", function() require('fzf-lua').treesitter() end,  { desc = "Open treesitter search", nowait = true })
 
 vim.keymap.set("n", "<leader>bi", function() require('fzf-lua').buffers() end, { desc = "ibuffer", nowait = true })
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next Buffer", nowait = true })
@@ -41,6 +42,8 @@ vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j")
 vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k")
 vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
 
+
+
 -- center
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
@@ -55,3 +58,5 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Move text up and down
 vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv", opts)
 vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv", opts)
+
+vim.keymap.set("t", "<C-w>", "<C-\\><C-n><C-w>")
