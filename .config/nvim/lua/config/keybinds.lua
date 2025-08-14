@@ -31,19 +31,6 @@ vim.keymap.set("v", "<leader>sn", ":!sort -n<CR>", { desc = "Numeric Sort", nowa
 vim.keymap.set("v", "<leader>sr", ":!sort -r<CR>", { desc = "Reverse Sort", nowait = true })
 vim.keymap.set("v", "<leader>ss", ":!sort<CR>", { desc = "Sort", nowait = true })
 
--- Better window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
-
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h")
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j")
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k")
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l")
-
-
-
 -- center
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })

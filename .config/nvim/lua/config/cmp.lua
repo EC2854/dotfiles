@@ -11,7 +11,7 @@ require("blink.cmp").setup({
     },
     completion = {
         ghost_text = {
-            enabled = false,
+            enabled = true,
         },
         documentation = {
             auto_show = true,
@@ -26,11 +26,11 @@ require("blink.cmp").setup({
         }
     },
     keymap = {
-        ['<CR>'] = { 'accept', 'fallback' },
+        ['<C-Space>'] = { 'select_and_accept' },
         ['<S-Tab>'] = { 'select_prev', 'fallback' },
         ['<Tab>'] = { 'select_next', 'fallback' },
-        ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
-        ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
+        ['<C-k>'] = { 'select_prev', 'fallback_to_mappings' },
+        ['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
     },
     signature = { enabled = true }
 })
