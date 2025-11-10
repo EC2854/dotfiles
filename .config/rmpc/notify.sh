@@ -13,7 +13,7 @@ mkdir -p "$TMP_DIR"
 
 # Where to temporarily store the album art received from rmpc
 
-ALBUM_ART_PATH="$TMP_DIR/notification_cover"
+ALBUM_ART_PATH="$TMP_DIR/notification_cover.png"
 
 
 # Path to fallback album art if no album art is found by rmpc/mpd
