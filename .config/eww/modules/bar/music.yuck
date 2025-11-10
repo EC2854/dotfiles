@@ -1,9 +1,0 @@
-(defwidget music[]
-    (eventbox :onhover "eww update music_rev=true" :onhoverlost 'eww update music_rev=false' :onscroll "scripts/change_music.sh"
-        (button :class "bean music" :space-evenly "false" :orientation "v" :tooltip "${MUSIC.title} - ${MUSIC.artist}" :style "background-image: url('${MUSIC.cover}');" :onclick "playerctl play-pause" :visible "${MUSIC.title == '' ? false : true}"
-            (revealer :transition "fade" :reveal music_rev :duration "300ms"
-                (label :class "music_icon" :text music_icon)
-            )
-        )
-    )
-)

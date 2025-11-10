@@ -8,7 +8,7 @@ require('lualine').setup({
         theme = "catppuccin",
         icons_enabled = true,
         component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
         disabled_filetypes = {
             statusline = {},
             winbar = {},
@@ -23,7 +23,7 @@ require('lualine').setup({
         }
     },
     sections = {
-        lualine_a = { { 'mode', separator = { right = '' }, right_padding = 2 } },
+        lualine_a = { { 'mode', separator = { right = '' }, right_padding = 2 } },
         lualine_b = { 'filename', 'branch' },
         lualine_c = {
             '%=',
@@ -31,7 +31,7 @@ require('lualine').setup({
         lualine_x = {},
         lualine_y = { 'filetype', 'progress' },
         lualine_z = {
-            { 'location', separator = { left = '' }, left_padding = 2 },
+            { 'location', separator = { left = '' }, left_padding = 2 },
         },
     },
     inactive_sections = {

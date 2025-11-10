@@ -10,3 +10,6 @@ require("config.treesitter")
 
 require("config.colorscheme")
 require("config.keybinds")
+
+require("config.strudel")
+require("config.typst")

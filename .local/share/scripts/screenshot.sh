@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-area=$(XCURSOR_THEME="Capitaine Cursors" slurp -b 171216c0 -c eeb4ea)
+area=$(slurp -b 121318c0 -c b2c5ff)
 grim -g "$area" - | wl-copy

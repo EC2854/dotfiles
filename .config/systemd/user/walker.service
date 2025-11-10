@@ -1,0 +1,12 @@
+[Unit]
+Description=Walker
+Requires=elephant.service
+After=elephant.service
+
+[Service]
+Type=simple
+ExecStart=walker --gapplication-service
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

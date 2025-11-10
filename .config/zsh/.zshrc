@@ -34,22 +34,8 @@ FZF_ALT_C_COMMAND=
 FZF_CTRL_T_COMMAND= 
 source <(fzf --zsh)
 
-case ${TERM} in 
-    linux*|tmux*)
-        PROMPT="%B%F{magenta}[%f%b%B%F{blue}%n%f%b%B@%b%B%F{blue}%m%f%b%B%F{magenta}] [%f%b%B%F{blue}%~%f%b%B%F{magenta}]%f%b%B%F{magenta}
+PROMPT="%B%F{magenta}[%f%b%B%F{blue}%n%f%b%B@%b%B%F{blue}%m%f%b%B%F{magenta}] [%f%b%B%F{blue}%~%f%b%B%F{magenta}]%f%b%B%F{magenta}
 > %f%b"
-    ;;
-    *)
-        eval "$(starship init zsh)"
-    ;;
-
-esac
-# Starship prompt
-
-# Fastfetch with random image
-# fastfetch --logo-height 6 --sixel "$(find ~/Pictures/menhera-chan -type f | shuf -n 1)"
-fastfetch
-
 # History configuration
 HISTSIZE=10000
 SAVEHIST=10000
@@ -112,7 +98,7 @@ bindkey '^[[B' history-substring-search-down
 # Completion settings
 zstyle ':completion:*' menu select
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:*' fzf-flags --color='bg:-1,bg+:-1,border:7,fg:7,fg+:4,header:4,prompt:7,hl:4,hl+:7,marker:4,pointer:4,spinner:4,info:7,label:4'  --no-scrollbar --no-hscroll --prompt ' ' --pointer '' --marker ''
+zstyle ':fzf-tab:*' fzf-flags --color='bg:-1,bg+:-1,gutter:0,border:7,fg:7,fg+:4,header:4,prompt:7,hl:4,hl+:7,marker:4,pointer:4,spinner:4,info:7,label:4'  --no-scrollbar --no-hscroll --prompt ' ' --pointer '' --marker ''
 zstyle ':fzf-tab:*' popup-min-size 80 12
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always --color=always --group-directories-first -a -1 $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --icons=always --color=always --group-directories-first -a -1 $realpath'

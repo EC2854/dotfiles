@@ -1,6 +1,6 @@
 # variables for zsh and bash
 # this file in sourced in .zshrc and .bashrc
-export PATH="$PATH:/home/$USER/.local/share/scripts"
+export PATH="$PATH:/home/$USER/.local/share/scripts:/home/$USER/.local/bin"
 
 #fzf settings 
 source ~/.config/zsh/fzf-style.zsh

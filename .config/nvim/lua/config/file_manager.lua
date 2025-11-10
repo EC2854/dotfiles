@@ -19,8 +19,6 @@ require("oil").setup({
     delete_to_trash = false,
     keymaps = {
         ["."] = { "actions.cd", mode = "n" },
-        ["h"] = { "actions.parent", mode = "n" },
-        ["l"] = { "actions.select", mode = "n" },
     },
 })
 vim.api.nvim_create_autocmd("User", {

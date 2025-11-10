@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-chosen=$(printf "  Power Off\n  Restart\n  Suspend\n  Lock" | fuzzel -d)
+chosen=$(printf "  Power Off\n  Restart\n  Suspend\n  Lock" | walker -d)
 
 case "$chosen" in
     "  Power Off") systemctl poweroff;;

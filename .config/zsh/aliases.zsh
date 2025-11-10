@@ -1,5 +1,6 @@
 # aliases for zsh and bash
 # this file in sourced in .zshrc and .bashrc
+. ~/.config/zsh/uutils.zsh
 
 # lf stuff
 lfcd() {
@@ -17,8 +18,8 @@ alias sv='sudoedit'
 alias s='sudo'
 alias rg='rg -p' 
 alias cls='clear'
-alias cp='cp -v'
-alias mv='mv -v'
+# alias cp='cp -v'
+# alias mv='mv -v'
 alias rm='trash-put'
 
 # adding some colors :3

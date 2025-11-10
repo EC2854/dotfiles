@@ -45,6 +45,8 @@ print() {
     printf "%s[%s]%s %s\n" "$color" "${type^^}" "$RESET" "$message"
 }
 
+print w "this script is outdated it and won't work properly"
+
 check_needed() {
     local installed
     installed=$(pacman -Qq)
@@ -176,13 +178,7 @@ install_font &
 clone_repository https://github.com/EC2854/wallpapers ~/Pictures/Wallpapers &
 
 print info "Enabling systemd services"
-systemctl --user add-wants graphical-session.target.wants eww.service 
-systemctl --user add-wants graphical-session.target.wants kanshi.service
-systemctl --user add-wants graphical-session.target.wants mako.service
-systemctl --user add-wants graphical-session.target.wants swww.service
 
-systemctl --user add-wants niri.service.wants eww-open@bar.service
-systemctl --user add-wants niri.service.wants pantheon-polkit.service
 
 wait
 print info "That's it!"
