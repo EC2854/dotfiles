@@ -1,8 +1,3 @@
-# aliases for zsh and bash
-# this file in sourced in .zshrc and .bashrc
-. ~/.config/zsh/uutils.zsh
-
-# lf stuff
 lfcd() {
     dir="$(lf -print-last-dir "$@")"
     while ! cd "$dir" 2>/dev/null; do
@@ -10,16 +5,15 @@ lfcd() {
     done
 }
 
-alias t='tmux a || tmux'
-
 # misc
+alias t='tmux a || tmux'
 alias v='nvim'
 alias sv='sudoedit'
 alias s='sudo'
 alias rg='rg -p' 
 alias cls='clear'
-# alias cp='cp -v'
-# alias mv='mv -v'
+alias cp='cp -v'
+alias mv='mv -v'
 alias rm='trash-put'
 
 # adding some colors :3
@@ -27,6 +21,16 @@ alias ls='ls --color=always'
 alias grep='grep --color=always'
 alias ip='ip --color=always'
 alias diff='diff --color=always'
+
+alias l='eza --icons=always --color=always --group-directories-first'
+alias la='eza --icons=always --color=always --group-directories-first -a'
+alias ll='eza --icons=always --color=always --group-directories-first -la --no-time'
+alias lt='eza --icons=always --color=always --group-directories-first -T'
+
+alias c='bat -P --color=always --style=plain --theme=base16 --wrap=auto'
+
+alias cal='cal -m'
+
 
 # Faster movement
 alias ..='cd ..'
@@ -49,18 +53,7 @@ alias .t='cd ~/.local/share/Trash/files'
 alias .v='cd ~/Videos'
 
 alias f='cd "$(find . -maxdepth 5 -type d -print | fzf --preview "eza --icons=always --color=always --group-directories-first -1 {}")"' 
-alias gf='cd "$(find ~ -maxdepth 5 -type d -print | fzf --preview "eza --icons=always --color=always --group-directories-first -1 {}")"'
-
-# Replacing ls with eza
-alias l='eza --icons=always --color=always --group-directories-first'
-alias la='eza --icons=always --color=always --group-directories-first -a'
-alias ll='eza --icons=always --color=always --group-directories-first -la --no-time'
-alias lt='eza --icons=always --color=always --group-directories-first -T'
-
-# Replacing cat with bat
-alias c='bat -P --color=always --style=plain --theme=base16 --wrap=auto'
-
-alias cal='cal -m'
+alias cf='cd "$(find ~ -maxdepth 5 -type d -print | fzf --preview "eza --icons=always --color=always --group-directories-first -1 {}")"'
 
 # Package Managment
 alias ySyu='yay -Syu --noconfirm --quiet --color=always && flatpak update -y'
@@ -86,6 +79,7 @@ alias toggle-dir='starship toggle directory'
 alias toggle-git='starship toggle git_branch'
 alias toggle-duration='starship toggle cmd_duration'
 
+# git
 alias ga="git add . && git status"
 alias gc="git commit -m"
 alias gp="git push"
@@ -93,6 +87,31 @@ alias gco="git checkout"
 alias gpu="git pull"
 alias gs="git status"
 
-# Silly
-alias fucking='sudo'
-alias okpa='systemctl poweroff'
+# systemctl 
+alias ctl='systemctl'
+alias ctlsp='systemctl stop'
+alias ctls='systemctl status'
+alias ctle='systemctl enable'
+alias ctld='systemctl disable'
+ctlst() { 
+    systemctl start "$1"
+    systemctl status "$1" 
+}
+ctlrt() { 
+    systemctl restart "$1"
+    systemctl status "$1" 
+}
+
+alias uctl='systemctl --user'
+alias uctlsp='systemctl --user stop'
+alias uctls='systemctl --user status'
+alias uctle='systemctl --user enable'
+alias uctld='systemctl --user disable'
+uctlst() { 
+    systemctl --user start "$1"
+    systemctl --user status "$1" 
+}
+uctlrt() { 
+    systemctl --user restart "$1"
+    systemctl --user status "$1" 
+}

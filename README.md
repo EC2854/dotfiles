@@ -15,22 +15,25 @@
 - Window Manager - [Hyprland](https://github.com/hyprwm/Hyprland)
 - Shell - [quickshell](https://quickshell.org)
 - Launcher - [walker](https://codeberg.org/dnkl/fuzzel)
-- Shell - [zsh](https://zsh.org)
+- Shell - bash + [blesh](https://github.com/akinomyoga/ble.sh)
 - Terminal - [foot](https://codeberg.org/dnkl/foot)
 - File Manager - [lf](https://github.com/gokcehan/lf)
 - IDE - [neovim](https://github.com/neovim/neovim)
 - Browser - [Zen](https://zen-browser.app)
 - Music Player - [rmpc](https://github.com/mierak/rmpc)
-- font - [BigBlueTerm Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.tar.xz)
+- font - [BigBlueTerm Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/BigBlueTerminal.tar.xz)
 
 </details>
 
 ## Screenshots
 ![1](./screenshots/1.png) 
 
+## Installation
 > [!WARNING]
-> Install script wasn't updated in a long time and it won't work
-> also I don't want to share assets from milk game so quickshell wont work properly
+> I don't want to share assets from milk game so quickshell wont display backgrounds
+```sh
+git clone --depth=1 https://github.com/EC2854/dotfiles.git && cd dotfiles && make install
+```
 
 # Archive
 > [!WARNING]

@@ -2,6 +2,7 @@ vim.pack.add({
     { src = "https://github.com/nvim-lualine/lualine.nvim" },
     { src = "https://github.com/goolord/alpha-nvim" },
     { src = "https://github.com/nvim-tree/nvim-web-devicons" },
+    { src = "https://github.com/karb94/neoscroll.nvim" },
 })
 require('lualine').setup({
     options = {
@@ -82,3 +83,7 @@ dashboard.section.buttons.opts.hl = "AlphaButtons"
 dashboard.opts.opts.noautocmd = true
 
 require("alpha").setup(dashboard.opts)
+
+require('neoscroll').setup({
+    duration_multiplier = 0.1,
+})

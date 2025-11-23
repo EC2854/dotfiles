@@ -1,0 +1,177 @@
+#!/usr/bin/env bash
+
+print() {
+    local name=$1
+    local value=$2
+    echo -e "\033[1;37m $name:\033[1;32m $value\033[0m"
+}
+colorize_permissions() {
+    local permissions=$1
+    for (( i=0; i<${#permissions}; i++ )); do
+        char="${permissions:i:1}"
+        case "$char" in
+            'r') colored_permissions+='\033[1;33m'"$char"'\033[0m' ;;
+            'w') colored_permissions+='\033[1;31m'"$char"'\033[0m' ;;
+            'x') colored_permissions+='\033[1;32m'"$char"'\033[0m' ;;
+            '-') colored_permissions+='\033[1;30m'"$char"'\033[0m' ;;
+            *) colored_permissions+="$char" ;
+        esac
+    done
+    echo -e "$colored_permissions"
+}
+draw_line() {
+    local width=$1
+    local line_char=$2
+    local line=""
+
+    [ -z "$3" ] || {
+        local text="$3"
+        local text_width=$(($(wc -m <<< "$text") - 1))
+
+        line+="$(for ((i = 0; i < 3; i++)); do echo -n "$line_char"; done) \033[1;37m$text\033[1;34m "
+        width=$((width - text_width - 5))
+    }
+    for ((i = 3; i < width; i++)); do
+        line+="$line_char"
+    done
+    echo -e "\033[1;34m$line\033[0m"
+}
+
+get_audio_data() {
+    local file="$1"
+    local data=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name,sample_rate,channels,duration,bit_rate,bits_per_raw_sample -of default=noprint_wrappers=1:nokey=1 "$file")
+
+    local codec_name=$(sed -n '1p' <<< "$data")
+    local sample_rate=$(sed -n '2p' <<< "$data")
+    local channels=$(sed -n '3p' <<< "$data")
+    local duration=$(sed -n '4p' <<< "$data")
+    local bit_rate=$(sed -n '5p' <<< "$data")
+    local bit_depth=$(sed -n '6p' <<< "$data")
+
+    duration=$(awk '{ 
+        minutes=int($1/60); 
+        seconds=int($1%60); 
+        if ($1 < 60) {
+            print seconds "s";
+        } 
+        else {
+            print minutes "m " seconds "s";
+        }
+    }' <<< "$duration" )
+
+    bit_rate=$(awk "BEGIN {print $bit_rate/1000}")
+
+    print "Codec" "$codec_name"
+    print "Sample Rate" "${sample_rate}Hz"
+    print "Channels" "$channels"
+    print "Duration" "$duration"
+
+    [ -z "$bit_rate" ] || print "Bitrate" "${bit_rate}kbps"
+    grep -q "N/A" <<< "$bit_depth" || print "Bit Depth" "$bit_depth"
+}
+get_image_data() {
+    local file="$1"
+    local data=$(identify -format "%wx%h\n%z\n%[colorspace]\n%[compression]" "$file")
+
+    local resolution=$(sed -n '1p' <<< "$data")
+    local color_depth=$(sed -n '2p' <<< "$data")
+    local color_space=$(sed -n '3p' <<< "$data")
+    local compression=$(sed -n '4p' <<< "$data")
+
+    print "Resolution" "$resolution"
+    print "Color Depth" "$color_depth-bit"
+    print "Color Space" "$color_space"
+    print "Compression" "$compression"
+}
+get_video_data() {
+    local file="$1"
+    
+    # Fetching video data using ffprobe
+    local data=$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,r_frame_rate -of default=noprint_wrappers=1:nokey=1 "$file")
+
+    local codec_name=$(sed -n '1p' <<< "$data")
+    local width=$(sed -n '2p' <<< "$data")
+    local height=$(sed -n '3p' <<< "$data")
+    local frame_rate=$(sed -n '4p' <<< "$data")
+    local duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$file")
+
+    frame_rate=$(awk "BEGIN {print $frame_rate/1}" <<< "$frame_rate")
+
+    duration=$(awk '{
+        minutes=int($1/60); 
+        seconds=int($1%60); 
+        if ($1 < 60) { print seconds "s"; } 
+        else { print minutes "m " seconds "s"; }
+    }' <<< "$duration")
+
+    bit_rate=$(awk "BEGIN {print $bit_rate/1000}")
+
+    print "Codec" "$codec_name"
+    print "Resolution" "${width}x${height}"
+    print "Frame Rate" "${frame_rate} fps"
+    print "Duration" "$duration"
+}
+print_file_properties() {
+    local file="$1"
+    local width="$2"
+    
+    
+    local properties=$(ls -lah "$file")
+
+    local file_type=$(file -Lb "$file" | awk -F ',' '{print $1}')
+    local mime_type=$(file -Lb --mime-type "$file")
+
+    local file_size=$(awk '{print $5}' <<< "$properties")
+    file_size="${file_size}B"
+
+    local permissions=$(awk '{print $1}' <<< "$properties")
+    permissions=$(colorize_permissions "${permissions:1}")
+
+    local owner=$(awk '{print $3}' <<< "$properties")
+    local group=$(awk '{print $4}' <<< "$properties")
+
+    local modified_time=$(date -d "@$(stat -c '%Y' "$file")" '+%a %b %d %H:%M %Y')
+    local access_time=$(date -d "@$(stat -c '%X' "$file")" '+%a %b %d %H:%M %Y')
+    local change_time=$(date -d "@$(stat -c '%Z' "$file")" '+%a %b %d %H:%M %Y')
+
+    draw_line "$width" "=" "File Properties"
+
+    print "Type" "$file_type"
+    print "Mime Type" "$mime_type"
+    print "Size" "$file_size"
+
+    draw_line "$width" "-"
+    
+    print "Permissions" "$permissions"
+    print "Owner" "$owner"
+    print "Group" "$group"
+
+    draw_line "$width" "-"
+
+    print "Last Accessed (atime)" "$access_time"
+    print "Last Modified (mtime)" "$modified_time"
+    print "Change Time (ctime)" "$change_time"
+
+    case $mime_type in 
+        "audio/"*)
+            draw_line "$width" "-"
+            get_audio_data "$file"
+        ;;
+        "text/"*)
+            draw_line "$width" "-"
+            print "Number of lines" "$(wc -l < "$file")"
+        ;;
+        "image/"*)
+            draw_line "$width" "-"
+            get_image_data "$1"
+        ;;
+        "video/"*)
+            draw_line "$width" "-"
+            get_video_data "$1"
+        ;;
+    esac
+
+    draw_line "$width" "="
+}
+
+print_file_properties "$1" "$2"

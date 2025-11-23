@@ -31,12 +31,6 @@ vim.keymap.set("v", "<leader>sn", ":!sort -n<CR>", { desc = "Numeric Sort", nowa
 vim.keymap.set("v", "<leader>sr", ":!sort -r<CR>", { desc = "Reverse Sort", nowait = true })
 vim.keymap.set("v", "<leader>ss", ":!sort<CR>", { desc = "Sort", nowait = true })
 
--- center
-vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
-
 -- Visual --
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", opts)

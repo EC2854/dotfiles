@@ -1,0 +1,236 @@
+# set shell zsh # it breaks $fx for some reason xD
+set hidden false
+set ignorecase true
+set icons true
+set drawbox true
+set preview true
+set sixel true
+
+# set promptfmt 
+# set statfmt 
+
+#set previewer ~/.config/lf/previewer
+set previewer ~/.config/lf/previewers/preview_sandbox.sh
+
+set shellopts '-eu'
+
+set ifs "\n"
+set filesep "\n"
+set scrolloff 10
+
+# Zoxide integration
+cmd z %{{
+    result="$(zoxide query --exclude "$PWD" "$@" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+cmd zi ${{
+    result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+cmd on-init &{{
+    # fmt="$(STARSHIP_SHELL= starship prompt | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    # lf -remote "send $id set promptfmt \"$fmt\""
+    lf -remote "send $id set statfmt \"$(eza -ld --color=always "$f" | sed 's/\\/\\\\/g;s/"/\\"/g')\""
+}}
+# starship integration 
+# cmd on-cd &{{
+#     zoxide add "$PWD"
+#     fmt="$(STARSHIP_SHELL= starship prompt | sed 's/\\/\\\\/g;s/"/\\"/g')"
+#     lf -remote "send $id set promptfmt \"$fmt\""
+# }}
+#
+# Eza for a bottom line 
+cmd on-select &{{
+    lf -remote "send $id set statfmt \"$(eza -ld --color=always "$f" | sed 's/\\/\\\\/g;s/"/\\"/g')\""
+}}
+
+# fzf stuff
+cmd fzf-jump ${{
+    source ~/.config/shell/fzf-style.sh
+    res="$(find . -maxdepth 5 | fzf --input-label='Jump to location' --preview='eza --icons=always --color=always --group-directories-first -1 {}')"
+    if [ -f "$res" ]; then
+        cmd="select"
+    elif [ -d "$res" ]; then
+        cmd="cd"
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+cmd fzf-search ${{
+    source ~/.config/zsh/fzf-style.zsh
+    cmd="rg --column --line-number --no-heading --color=always --smart-case"
+    fzf --ansi --disabled --layout=reverse --header="Search in files" --delimiter=: \
+        --bind="start:reload([ -n {q} ] && $cmd -- {q} || true)" \
+        --bind="change:reload([ -n {q} ] && $cmd -- {q} || true)" \
+        --bind='enter:become(lf -remote "send $id select \"$(printf "%s" {1} | sed '\''s/\\/\\\\/g;s/"/\\"/g'\'')\"")' \
+        --preview='bat --color=always --paging=never --style=numbers --theme=base16 --wrap=auto  --highlight-line={2} -- {1}'
+}}
+# Change layouts
+cmd nnn-mode %{{
+    if [ "$lf_preview" = true ]; then
+        lf -remote "send $id :set preview false; set ratios 1"
+    else
+        lf -remote "send $id :set ratios 1:2:3; set preview true"
+    fi
+}}
+cmd nnn-preview %{{
+    if [ "$lf_preview" = true ]; then
+        lf -remote "send $id :set preview false; set ratios 1"
+    else
+        lf -remote "send $id :set ratios 1:1; set preview true"
+    fi
+}}
+
+# Custom stuff
+cmd mk %{{
+    read ans
+    if echo "$ans" | grep "/" ; then
+        if echo "$ans" | grep "/$"; then
+            mkdir -p "$ans"
+        else
+            mkdir -p "$(dirname "$ans")"
+            touch "$ans"           
+        fi
+    else
+        touch "$ans"
+    fi
+}}
+# &
+cmd set-exec ${{
+    for file in $fx; do
+        if [ -x "$file" ];then  
+            chmod -x $file
+        else
+            chmod +x "$file" 
+        fi
+    done
+    lf -remote 'send reload'
+}}
+cmd unarchive ${{
+  case "$f" in
+      *.tar.gz|*.tgz) tar -xzvf "$f" ;;
+      *.tar.bz2|*.tbz2) tar -xjvf "$f" ;;
+      *.tar.xz|*.txz) tar -xJvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *.zip) unzip "$f" ;;
+      *.xz) xz -dk "$f" ;;
+      *.gz) gzip -dk "$f" ;;
+      *.bz2) bzip2 -dk "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+cmd open &{{
+    case $(file --mime-type -Lb $f) in
+        text/*) lf -remote "send $id \$$EDITOR \$fx";;
+        video/*) mpv "$fx"> /dev/null 2> /dev/null &;;
+        audio/*) lf -remote "send $id \$mpv --no-video \$fx";;
+        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
+cmd trash %trash-put -- $fx
+
+cmd bulk-rename ${{
+    old="$(mktemp)"
+    new="$(mktemp)"
+    if [ -n "$fs" ]; then
+        fs="$(basename -a -- $fs)"
+    else
+        fs="$(ls)"
+    fi
+    printf '%s\n' "$fs" > "$old"
+    printf '%s\n' "$fs" > "$new"
+    $EDITOR "$new"
+    [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
+    paste "$old" "$new" | while IFS= read -r names; do
+        src="$(printf '%s' "$names" | cut -f1)"
+        dst="$(printf '%s' "$names" | cut -f2)"
+        if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
+            continue
+        fi
+        mv -- "$src" "$dst"
+    done
+    rm -- "$old" "$new"
+    lf -remote "send $id unselect"
+}}
+
+# There is a problem with copying images other than *.png
+cmd clipboard-copy &{{
+    type=$(file -Lb --mime-type "$f")
+
+    [ "$type" = "image/"* ] && {
+        [ "$type" = "image/png" ] || {
+            tmp_image=$(mktemp /tmp/lf-copy.XXXXXX.png)
+            ffmpeg -y -v 0 -i "$f" "$tmp_image"
+            f="$tmp_image"
+        }
+    } 
+
+    wl-copy < "$f" 
+    [ -n "$tmp_image" ] && rm "$tmp_image"
+}}
+cmd clipboard-paste &{{
+    wl-paste > "pasted"
+}}
+
+cmd share $curl -F"file=@$fx" -Fexpires=4 https://0x0.st | wl-copy
+
+cmd change-preview &{{
+    previewer=$(realpath ~/.config/lf/previewer)
+
+    if echo "$previewer" | grep -q "info" ; then
+        ln -sf ~/.config/lf/previewers/preview ~/.config/lf/previewer
+    else
+        ln -sf ~/.config/lf/previewers/info ~/.config/lf/previewer
+    fi
+    lf -remote "send reload"
+}}
+
+cmd set-wall &{{
+    matugen image "$f"
+}}
+cmd mount-drive ${{
+    source ~/.config/zsh/fzf-style.zsh
+    ~/.local/share/scripts/mount_removable.sh
+}}
+map i change-preview
+
+map R bulk-rename
+map s shell
+map . set hidden!
+map D trash
+map c clear
+map a mk
+map x set-exec
+map Y clipboard-copy
+map P clipboard-paste
+map w set-wall
+map u unarchive
+map um mount
+
+map m
+map md mount-drive
+
+map mm nnn-mode
+map mp nnn-preview
+
+map <enter> open
+map o open
+
+map f fzf-jump
+map gs fzf-search
+
+map gh cd ~
+map gm cd ~/Music 
+map gv cd ~/Videos 
+map gd cd ~/Documents
+map gD cd ~/Downloads 
+map gp cd ~/Pictures 
+map gr cd ~/Repos
+
+map gc cd ~/.config 
+map ga cd ~/.cache 
+map gl cd ~/.local/share
+map gt cd ~/.local/share/Trash/files
+map gM ${{ lf -remote "send $id cd /run/media/$USER" }} 

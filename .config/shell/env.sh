@@ -1,9 +1,7 @@
-# variables for zsh and bash
-# this file in sourced in .zshrc and .bashrc
-export PATH="$PATH:/home/$USER/.local/share/scripts:/home/$USER/.local/bin"
+export PATH="$PATH:/home/$USER/.local/bin"
 
 #fzf settings 
-source ~/.config/zsh/fzf-style.zsh
+source ~/.config/shell/fzf-style.sh
 
 # Colorize sudo prompt
 export SUDO_PROMPT=$'\e[1;31m[sudo]\e[0m Enter a password for %u: '
@@ -11,7 +9,8 @@ export SUDO_PROMPT=$'\e[1;31m[sudo]\e[0m Enter a password for %u: '
 # Default Apps
 export EDITOR="nvim"
 export VISUAL="nvim"
-export BROWSER="librewolf"
+
+export MPD_HOST=/tmp/mpd.sock
 
 # Manpager
 export MANPAGER="less -R --use-color -Dd+b -Du+m"
